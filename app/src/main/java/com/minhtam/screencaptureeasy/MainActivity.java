@@ -1,14 +1,9 @@
 package com.minhtam.screencaptureeasy;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.media.projection.MediaProjection;
-import android.media.projection.MediaProjectionManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.transition.Scene;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.webkit.PermissionRequest;
 import android.widget.Button;
 import android.widget.Switch;
 
@@ -45,7 +40,8 @@ public class MainActivity extends AppCompatActivity {
         swCameraButton.setChecked(sharedPreferencesManager.getCameraButtonMode());
         swShake.setChecked(sharedPreferencesManager.getShakeMode());
 
-        if (sharedPreferencesManager.getIsStart()) {
+        isStart = sharedPreferencesManager.getIsStart();
+        if (isStart) {
             btnStart.setText(getString(R.string.stop));
         } else {
             btnStart.setText(getString(R.string.start));

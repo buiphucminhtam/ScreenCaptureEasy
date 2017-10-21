@@ -3,6 +3,11 @@
     package="com.minhtam.screencaptureeasy">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <uses-feature
+        android:name="android.hardware.sensor.accelerometer"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -23,6 +28,8 @@
             android:name=".ServiceCapture"
             android:enabled="true"
             android:exported="true" />
+
+        <activity android:name=".SettingActivity"></activity>
     </application>
 
 </manifest>

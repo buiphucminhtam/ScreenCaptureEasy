@@ -20,14 +20,12 @@ public class SharedPreferencesManager {
 
 
     public void saveSetting(boolean notification_mode, boolean overlayicon_mode, boolean camerabutton_mode, boolean shake_mode, boolean isStart) {
-        SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(activity.getString(R.string.save_notification_icon), notification_mode);
         editor.putBoolean(activity.getString(R.string.save_overlay_icon), overlayicon_mode);
         editor.putBoolean(activity.getString(R.string.save_camera_button), camerabutton_mode);
         editor.putBoolean(activity.getString(R.string.save_shake), shake_mode);
         editor.putBoolean(activity.getString(R.string.save_state),isStart);
-
         editor.commit();
     }
 

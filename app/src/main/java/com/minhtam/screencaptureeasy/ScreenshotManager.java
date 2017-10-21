@@ -18,9 +18,13 @@ import android.support.annotation.UiThread;
 import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import java.io.File;
 import java.nio.ByteBuffer;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import github.nisrulz.screenshott.ScreenShott;
 
@@ -39,11 +43,9 @@ public class ScreenshotManager {
     }
 
     public void requestScreenshotPermission(@NonNull Activity activity, int requestId) {
-        try {
+        if (mIntent == null) {
             MediaProjectionManager mediaProjectionManager = (MediaProjectionManager) activity.getSystemService(Context.MEDIA_PROJECTION_SERVICE);
             activity.startActivityForResult(mediaProjectionManager.createScreenCaptureIntent(), requestId);
-        } catch (Exception e) {
-
         }
 
     }
@@ -107,7 +109,13 @@ public class ScreenshotManager {
                         super.onPostExecute(bitmap);
                         Log.d("AppLog", "Got bitmap?" + (bitmap != null));
                         try {
-                            File file = ScreenShott.getInstance().saveScreenshotToPicturesFolder(context, bitmap, "my_screenshot_filename");
+
+                            DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH.mm.ss");
+                            Date date = new Date();
+
+                            File file = ScreenShott.getInstance().saveScreenshotToPicturesFolder(context, bitmap, dateFormat.format(date));
+
+                            Toast.makeText(context, file.getName() +"", Toast.LENGTH_SHORT).show();
                             Log.d("ServiceCapture", "File != null");
                         } catch (Exception e) {
                             e.printStackTrace();

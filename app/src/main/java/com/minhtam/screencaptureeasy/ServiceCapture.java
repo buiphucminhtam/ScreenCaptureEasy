@@ -1,26 +1,25 @@
 package com.minhtam.screencaptureeasy;
 
-import android.app.Activity;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
+import android.content.IntentFilter;
 import android.graphics.PixelFormat;
 import android.os.CountDownTimer;
 import android.os.IBinder;
-import android.support.annotation.IntDef;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 
-import java.io.File;
-
-import github.nisrulz.screenshott.ScreenShott;
+import safety.com.br.android_shake_detector.core.ShakeCallback;
+import safety.com.br.android_shake_detector.core.ShakeDetector;
+import safety.com.br.android_shake_detector.core.ShakeOptions;
 
 public class ServiceCapture extends Service {
     private View rootView;
@@ -30,6 +29,8 @@ public class ServiceCapture extends Service {
 
     private View overlayIcon;
     private WindowManager mWindowManager;
+
+    private ShakeDetector shakeDetector;
 
     public ServiceCapture() {
     }
@@ -44,7 +45,6 @@ public class ServiceCapture extends Service {
     public void onCreate() {
         super.onCreate();
         Log.d("ServiceCapture", "SERVICE CREATE");
-
     }
 
     @Override
@@ -59,6 +59,29 @@ public class ServiceCapture extends Service {
 
         if (intent.getBooleanExtra(getApplicationContext().getString(R.string.save_overlay_icon), false)) {
             showOverlayIcon();
+        }
+
+        if (intent.getBooleanExtra(getApplicationContext().getString(R.string.save_shake), false)) {
+            ShakeOptions options = new ShakeOptions()
+                    .background(true)
+                    .interval(1000)
+                    .shakeCount(1)
+                    .sensibility(2.0f);
+
+            shakeDetector = new ShakeDetector(options).start(this, new ShakeCallback() {
+                @Override
+                public void onShake() {
+                    screenshotManager.takeScreenshot(getApplicationContext());
+                }
+            });
+        }
+
+
+        if (intent.getBooleanExtra(getApplicationContext().getString(R.string.save_camera_button), false)) {
+            //register broadcast receiver
+            IntentFilter filter = new IntentFilter(Intent.ACTION_CAMERA_BUTTON);
+            filter.addAction(Intent.ACTION_PACKAGE_ADDED);
+            registerReceiver(receiver, filter);
         }
 
 
@@ -78,6 +101,10 @@ public class ServiceCapture extends Service {
                 }.start();
 
                 Log.d("ServiceCapture", ACTION_SCREEN_CAPTURE_NOTIFICATION);
+            }
+
+            if (intent.getAction().equals(Intent.ACTION_MAIN)) {
+                startActivity(new Intent(this,MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             }
         }
 
@@ -127,10 +154,10 @@ public class ServiceCapture extends Service {
     }
 
 
-        private void showForegroundNotificationMode2(String contentText) {
+    private void showForegroundNotificationMode2(String contentText) {
         // Create intent that will bring our app to the front, as if it was tapped in the app
         // launcher
-        Intent showTaskIntent = new Intent(getApplicationContext(), MainActivity.class);
+        Intent showTaskIntent = new Intent(getApplicationContext(), ServiceCapture.class);
         showTaskIntent.setAction(Intent.ACTION_MAIN);
         showTaskIntent.addCategory(Intent.CATEGORY_LAUNCHER);
         showTaskIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -200,7 +227,7 @@ public class ServiceCapture extends Service {
                         //The check for Xdiff <10 && YDiff< 10 because sometime elements moves a little while clicking.
                         //So that is click event.
                         if (Xdiff < 10 && Ydiff < 10) {
-                            overlayIcon.setVisibility(View.GONE);
+                            mWindowManager.removeView(overlayIcon);
                             screenshotManager.takeScreenshot(getApplicationContext());
                             new CountDownTimer(2000, 1000) {
                                 @Override
@@ -210,7 +237,7 @@ public class ServiceCapture extends Service {
 
                                 @Override
                                 public void onFinish() {
-                                    overlayIcon.setVisibility(View.VISIBLE);
+                                    mWindowManager.addView(overlayIcon,params);
                                 }
                             }.start();
                         }
@@ -228,5 +255,23 @@ public class ServiceCapture extends Service {
                 return false;
             }
         });
+    }
+
+    private final BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if(action.equals(intent.ACTION_CAMERA_BUTTON)){
+                screenshotManager.takeScreenshot(context);
+            }
+        }
+    };
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(receiver);
+        if(overlayIcon!=null)
+            mWindowManager.removeView(overlayIcon);
     }
 }
