@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/prefGeneralTittle">
+        <SwitchPreference android:title="@string/saveSilentlyTittle"
+            android:key="@string/savesilently_key"/>
+        <SwitchPreference android:title="@string/startOnBoot"
+            android:key="@string/startonboot_key"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/prefLayoutTittle">
+        <ListPreference android:title="@string/theme"
+            android:entries="@array/themeArray"
+            android:entryValues="@array/themeValues"
+            android:key="@string/theme_key"/>
+
+        <ListPreference android:title="@string/language"
+            android:entries="@array/languageArray"
+            android:entryValues="@array/languageValues"
+            android:key="@string/language_key"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/prefTimeoutTittle">
+        <ListPreference
+            android:key="@string/countdownValues_key"
+            android:defaultValue="0"
+            android:entries="@array/countdownArray"
+            android:entryValues="@array/countdownValues"/>
+        <SwitchPreference android:title="@string/countdown"
+            android:key="@string/countdown_key"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/prefStorageTittle">
+        <com.github.angads25.filepicker.view.FilePickerPreference
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:key="@string/savelocation_key"
+            android:title="@string/saveLocation"
+            android:summary="Just a Summary"
+            android:defaultValue="/storage/emulated/0/Pictures/Screenshots"
+            app:titleText="@string/selectdirectories"
+            app:error_dir="/mnt"
+            app:root_dir="/sdcard"
+            app:selection_mode="multi_mode"
+            app:selection_type="dir_select"
+            app:extensions="txt:pdf:"/>
+
+        <ListPreference android:title="@string/fileName"
+            android:key="@string/filename_key"
+            android:entries="@array/filename"
+            android:entryValues="@array/filename_values"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

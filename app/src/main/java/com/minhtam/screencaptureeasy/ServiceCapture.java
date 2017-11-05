@@ -71,7 +71,21 @@ public class ServiceCapture extends Service {
             shakeDetector = new ShakeDetector(options).start(this, new ShakeCallback() {
                 @Override
                 public void onShake() {
-                    screenshotManager.takeScreenshot(getApplicationContext());
+                    if (mWindowManager != null) {
+                        mWindowManager.removeView(overlayIcon);
+                        screenshotManager.takeScreenshot(getApplicationContext());
+                        new CountDownTimer(2000, 1000) {
+                            @Override
+                            public void onTick(long l) {
+
+                            }
+
+                            @Override
+                            public void onFinish() {
+                                mWindowManager.addView(overlayIcon,params);
+                            }
+                        }.start();
+                    }
                 }
             });
         }
@@ -88,6 +102,11 @@ public class ServiceCapture extends Service {
         Log.d("ServiceCapture", "TAKE SCREEN SHOT");
         if (intent.getAction() != null) {
             if (intent.getAction().equals(ACTION_SCREEN_CAPTURE_NOTIFICATION)) {
+                if (mWindowManager != null) {
+                    mWindowManager.removeView(overlayIcon);
+                }
+
+
                 new CountDownTimer(2000, 1000) {
                     @Override
                     public void onTick(long l) {
@@ -100,6 +119,18 @@ public class ServiceCapture extends Service {
                     }
                 }.start();
 
+
+                new CountDownTimer(2000, 1000) {
+                    @Override
+                    public void onTick(long l) {
+
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        mWindowManager.addView(overlayIcon,params);
+                    }
+                }.start();
                 Log.d("ServiceCapture", ACTION_SCREEN_CAPTURE_NOTIFICATION);
             }
 
@@ -183,16 +214,18 @@ public class ServiceCapture extends Service {
     private float initialTouchX;
     private float initialTouchY;
 
+    //Add the view to the window.
+    final WindowManager.LayoutParams params = new WindowManager.LayoutParams(
+            WindowManager.LayoutParams.WRAP_CONTENT,
+            WindowManager.LayoutParams.WRAP_CONTENT,
+            WindowManager.LayoutParams.TYPE_PHONE,
+            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+            PixelFormat.TRANSLUCENT);
+
     private void showOverlayIcon() {
         overlayIcon = LayoutInflater.from(this).inflate(R.layout.chathead_layout, null);
 
-        //Add the view to the window.
-        final WindowManager.LayoutParams params = new WindowManager.LayoutParams(
-                WindowManager.LayoutParams.WRAP_CONTENT,
-                WindowManager.LayoutParams.WRAP_CONTENT,
-                WindowManager.LayoutParams.TYPE_PHONE,
-                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
-                PixelFormat.TRANSLUCENT);
+
 
         //Specify the view position
         params.gravity = Gravity.TOP | Gravity.LEFT;        //Initially view will be added to top-left corner

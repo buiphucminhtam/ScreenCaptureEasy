@@ -115,7 +115,7 @@ public class ScreenshotManager {
 
                             File file = ScreenShott.getInstance().saveScreenshotToPicturesFolder(context, bitmap, dateFormat.format(date));
 
-                            Toast.makeText(context, file.getName() +"", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Saved " + file.getName() +"", Toast.LENGTH_SHORT).show();
                             Log.d("ServiceCapture", "File != null");
                         } catch (Exception e) {
                             e.printStackTrace();
