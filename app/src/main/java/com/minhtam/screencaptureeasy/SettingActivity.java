@@ -28,6 +28,8 @@ public class SettingActivity extends PreferenceActivity implements SharedPrefere
             listCountDown.setValueIndex(0);
         }
 
+        listThemes.setSummary(prefs.getString(getString(R.string.theme_key),getResources().getStringArray(R.array.themeArray)[0]));
+
     }
 
     @Override
@@ -45,10 +47,10 @@ public class SettingActivity extends PreferenceActivity implements SharedPrefere
                 pref.setSummary(prefs.getString(getString(R.string.countdownValues_key),getResources().getStringArray(R.array.countdownValues)[0]) + " seconds");
                 break;
             case R.string.saveLocation:
-                prefs.getString(getString(R.string.savelocation_key),defaultLocation);
+                pref.setSummary(prefs.getString(getString(R.string.savelocation_key),defaultLocation));
                 break;
             case R.string.fileName:
-                prefs.getString(getString(R.string.filename_key),getResources().getStringArray(R.array.filename)[0]);
+                pref.setSummary(prefs.getString(getString(R.string.filename_key),getResources().getStringArray(R.array.filename)[0]));
                 break;
         }
 
