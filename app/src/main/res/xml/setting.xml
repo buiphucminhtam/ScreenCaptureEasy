@@ -37,10 +37,9 @@
             android:title="@string/saveLocation"
             android:summary="Just a Summary"
             android:defaultValue="/storage/emulated/0/Pictures/Screenshots"
-            app:titleText="@string/selectdirectories"
             app:error_dir="/mnt"
             app:root_dir="/sdcard"
-            app:selection_mode="multi_mode"
+            app:selection_mode="single_mode"
             app:selection_type="dir_select"
             app:extensions="txt:pdf:"/>
 
