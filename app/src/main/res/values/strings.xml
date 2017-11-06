@@ -43,4 +43,5 @@
     <string name="countdown_key">countdown</string>
     <string name="countdownValues_key">countdownValues</string>
     <string name="filename_key">filname</string>
+    <string name="countdownvaluetittle"></string>
 </resources>

@@ -22,6 +22,7 @@
 
     <PreferenceCategory android:title="@string/prefTimeoutTittle">
         <ListPreference
+            android:title="@string/countdownvaluetittle"
             android:key="@string/countdownValues_key"
             android:defaultValue="0"
             android:entries="@array/countdownArray"
@@ -36,7 +37,6 @@
             android:key="@string/savelocation_key"
             android:title="@string/saveLocation"
             android:summary="Just a Summary"
-            android:defaultValue="/storage/emulated/0/Pictures/Screenshots"
             app:error_dir="/mnt"
             app:root_dir="/sdcard"
             app:selection_mode="single_mode"

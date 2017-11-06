@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         MenuItem item = menu.add(1, 1, 1, "Setting");
 
         item.setIcon(R.drawable.ic_settings_white_24dp);
+        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
         return super.onCreateOptionsMenu(menu);
     }

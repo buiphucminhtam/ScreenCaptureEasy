@@ -2,14 +2,19 @@ package com.minhtam.screencaptureeasy;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 
+import com.github.angads25.filepicker.view.FilePickerPreference;
+
+import java.io.File;
+
 public class SettingActivity extends PreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private SharedPreferences prefs;
-    private final String defaultLocation = "/storage/emulated/0/Pictures/Screenshots";
+    private final String defaultLocation = Environment.DIRECTORY_PICTURES + File.separator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,16 +24,25 @@ public class SettingActivity extends PreferenceActivity implements SharedPrefere
         prefs = getPreferenceScreen().getSharedPreferences();
 
         ListPreference listCountDown = (ListPreference) findPreference(getString(R.string.countdownValues_key));
-        ListPreference listThemes = (ListPreference) findPreference(getString(R.string.countdownValues_key));
+        ListPreference listThemes = (ListPreference) findPreference(getString(R.string.theme_key));
+        ListPreference listFileName = (ListPreference) findPreference(getString(R.string.filename_key));
+        FilePickerPreference preference = (FilePickerPreference) findPreference(getString(R.string.savelocation_key));
 
         //check count down to hide, show list cd
         if (prefs.getBoolean(getString(R.string.countdown_key), false)) {
-            listCountDown.setSummary(prefs.getString(getString(R.string.countdownValues_key),getResources().getStringArray(R.array.countdownValues)[0]) + " seconds");
+            listCountDown.setSummary(prefs.getString(getString(R.string.countdownValues_key) + "seconds",getResources().getStringArray(R.array.countdownArray)[0]));
         } else {
-            listCountDown.setValueIndex(0);
+            listCountDown.setSummary(getResources().getStringArray(R.array.countdownArray)[0]);
         }
 
         listThemes.setSummary(prefs.getString(getString(R.string.theme_key),getResources().getStringArray(R.array.themeArray)[0]));
+
+        String value = prefs.getString(getString(R.string.filename_key),getResources().getStringArray(R.array.filename_values)[0]);
+        int position = Integer.parseInt(value);
+        listFileName.setSummary(getResources().getStringArray(R.array.filename)[position]);
+
+        //set default for file location
+        preference.setSummary(defaultLocation);
 
     }
 
@@ -43,14 +57,17 @@ public class SettingActivity extends PreferenceActivity implements SharedPrefere
             case R.string.language:
                 pref.setSummary(prefs.getString(getResources().getString(R.string.language_key),getResources().getStringArray(R.array.languageArray)[0]));
                 break;
-            case R.string.countdown:
-                pref.setSummary(prefs.getString(getString(R.string.countdownValues_key),getResources().getStringArray(R.array.countdownValues)[0]) + " seconds");
+            case R.string.countdownvaluetittle:
+                ListPreference listCountDown = (ListPreference) findPreference(getString(R.string.countdownValues_key));
+                listCountDown.setSummary(prefs.getString(getString(R.string.countdownValues_key) + " seconds",getResources().getStringArray(R.array.countdownArray)[0]));
                 break;
             case R.string.saveLocation:
                 pref.setSummary(prefs.getString(getString(R.string.savelocation_key),defaultLocation));
                 break;
             case R.string.fileName:
-                pref.setSummary(prefs.getString(getString(R.string.filename_key),getResources().getStringArray(R.array.filename)[0]));
+                String value = prefs.getString(getString(R.string.filename_key),getResources().getStringArray(R.array.filename_values)[0]);
+                int position = Integer.parseInt(value);
+                pref.setSummary(getResources().getStringArray(R.array.filename)[position]);
                 break;
         }
 
