@@ -12,11 +12,13 @@ import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.IBinder;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import java.io.File;
 
@@ -36,10 +38,10 @@ public class ServiceCapture extends Service {
     private ShakeDetector shakeDetector;
 
     private boolean saveSilently = false;
-    private long countDownValue = 0;
+    private long countDownValue = 1000;
     private final long delayOverlayIcon = 2000;
     private String fileName = "yyyyMMdd_hhmmss";
-    private String filePath = Const.defaultLocation;
+    private String filePath = Const.defaultLocationSDCard;
     private String fileType = "PNG";
 
     public ServiceCapture() {
@@ -83,10 +85,10 @@ public class ServiceCapture extends Service {
 
         //get values
         saveSilently = intent.getBooleanExtra(getString(R.string.savesilently_key), false);
-        countDownValue = Long.parseLong(intent.getStringExtra(getString(R.string.countdownValues_key)));
+        countDownValue = intent.getIntExtra(getString(R.string.countdownValues_key),1000);
         fileName = intent.getStringExtra(getString(R.string.filename_key));
         filePath = intent.getStringExtra(getString(R.string.savelocation_key));
-        filePath = intent.getStringExtra(getString(R.string.filetype_key));
+        fileType = intent.getStringExtra(getString(R.string.filetype_key));
 
         //check icon
         if (intent.getBooleanExtra(getApplicationContext().getString(R.string.save_notification_icon), false)) {
@@ -139,16 +141,34 @@ public class ServiceCapture extends Service {
         }
     }
 
+
+    private TextView tvCountDown;
+    private WindowManager.LayoutParams tvParams;
     private void startCaptureScreen() {
         if (mWindowManager != null) {
             mWindowManager.removeView(overlayIcon);
         }
+        if (countDownValue > 1000) {
+            tvCountDown = new TextView(getApplicationContext());
+            tvCountDown.setTextSize(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 25, getResources().getDisplayMetrics()));
 
+            tvParams = new WindowManager.LayoutParams(
+                    WindowManager.LayoutParams.WRAP_CONTENT,
+                    WindowManager.LayoutParams.WRAP_CONTENT,
+                    WindowManager.LayoutParams.TYPE_PHONE,
+                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+                    PixelFormat.TRANSLUCENT);
+
+            mWindowManager.addView(tvCountDown,tvParams);
+        }
 
         new CountDownTimer(countDownValue, 1000) {
             @Override
             public void onTick(long l) {
-
+                if (countDownValue > 1000) {
+                    tvCountDown.setText(l + "");
+                    mWindowManager.updateViewLayout(tvCountDown,tvParams);
+                }
             }
 
             @Override
@@ -254,8 +274,6 @@ public class ServiceCapture extends Service {
     private void showOverlayIcon() {
         overlayIcon = LayoutInflater.from(this).inflate(R.layout.chathead_layout, null);
 
-
-
         //Specify the view position
         params.gravity = Gravity.TOP | Gravity.LEFT;        //Initially view will be added to top-left corner
         params.x = 0;
@@ -301,8 +319,7 @@ public class ServiceCapture extends Service {
 //                                public void onFinish() {
 //                                    mWindowManager.addView(overlayIcon,params);
 //                                }
-//                            }.start();
-
+//                            }.start()
                             startCaptureScreen();
                         }
                         return true;
@@ -334,7 +351,7 @@ public class ServiceCapture extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        unregisterReceiver(receiver);
+//        unregisterReceiver(receiver);
         if(overlayIcon!=null)
             mWindowManager.removeView(overlayIcon);
     }

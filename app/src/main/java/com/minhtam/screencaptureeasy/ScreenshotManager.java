@@ -113,7 +113,6 @@ public class ScreenshotManager {
 
                             DateFormat dateFormat = new SimpleDateFormat(fileName);
                             Date date = new Date();
-
                             File file = ImageSaver.getInstance().saveScreenshotToPicturesFolder(context, bitmap, dateFormat.format(date),filePath,fileType);
 
                             Toast.makeText(context, "Saved " + file.getName() +"", Toast.LENGTH_SHORT).show();

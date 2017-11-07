@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.media.MediaScannerConnection;
 import android.os.Environment;
+import android.util.Log;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -45,11 +46,13 @@ public class ImageSaver {
     private File getOutputMediaFile(String filename, String path, String imageFormat) {
         // To be safe, you should check that the SDCard is mounted
         // using Environment.getExternalStorageState() before doing this.
-//        File mediaStorageDirectory = new File(
-//                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
-//                        + File.separator);
 
-        File mediaStorageDirectory = new File(path);
+        Log.d("FilePath", path);
+
+        File mediaStorageDirectory = new File(
+                path);
+
+//        File mediaStorageDirectory = new File(path);
         // Create the storage directory if it does not exist
         if (!mediaStorageDirectory.exists()) {
             if (!mediaStorageDirectory.mkdirs()) {

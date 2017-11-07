@@ -3,6 +3,7 @@ package com.minhtam.screencaptureeasy;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 /**
  * Created by Tam on 10/19/2017.
@@ -12,10 +13,13 @@ public class SharedPreferencesManager {
     private Activity activity;
     private SharedPreferences sharedPreferences;
 
+    private SharedPreferences settingPreferences;
+
     public SharedPreferencesManager(Activity activity) {
         super();
         this.activity = activity;
         sharedPreferences = activity.getSharedPreferences("savesetting",Context.MODE_PRIVATE);
+        settingPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
     }
 
 
@@ -51,22 +55,23 @@ public class SharedPreferencesManager {
     }
 
     public boolean getSaveSilently() {
-        return sharedPreferences.getBoolean(activity.getString(R.string.savesilently_key), false);
+        return settingPreferences.getBoolean(activity.getString(R.string.savesilently_key), false);
     }
 
     public int getCountDown() {
-        if (sharedPreferences.getBoolean(activity.getString(R.string.countdown_key), false)) {
+        if (settingPreferences.getBoolean(activity.getString(R.string.countdown_key), false)) {
             return Integer.parseInt(activity.getString(R.string.countdownValues_key));
         } else {
             return 0;
         }
     }
 
+
     public String getSaveLocation() {
-        return sharedPreferences.getString(activity.getString(R.string.savelocation_key),Const.defaultLocation);
+        return settingPreferences.getString(activity.getString(R.string.savelocation_key),Const.defaultLocationSDCard);
     }
 
     public String getFileName() {
-        return sharedPreferences.getString(activity.getString(R.string.filename_key),activity.getResources().getStringArray(R.array.filename)[0]);
+        return settingPreferences.getString(activity.getString(R.string.filename_key),activity.getResources().getStringArray(R.array.filename)[0]);
     }
 }

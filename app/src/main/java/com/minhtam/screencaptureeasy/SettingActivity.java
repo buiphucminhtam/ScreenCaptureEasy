@@ -22,7 +22,7 @@ import java.io.File;
 public class SettingActivity extends PreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private SharedPreferences prefs;
-    private final String defaultLocation = Const.defaultLocation;
+    private String defaultLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class SettingActivity extends PreferenceActivity implements SharedPrefere
 
         //check count down to hide, show list cd
         if (prefs.getBoolean(getString(R.string.countdown_key), false)) {
-            listCountDown.setSummary(prefs.getString(getString(R.string.countdownValues_key) + "seconds",getResources().getStringArray(R.array.countdownArray)[0]));
+            listCountDown.setSummary(prefs.getString(getString(R.string.countdownValues_key),getResources().getStringArray(R.array.countdownValues)[0]) + " seconds");
         } else {
             listCountDown.setSummary(getResources().getStringArray(R.array.countdownArray)[0]);
         }
@@ -49,8 +49,11 @@ public class SettingActivity extends PreferenceActivity implements SharedPrefere
         int position = Integer.parseInt(value);
         listFileName.setSummary(getResources().getStringArray(R.array.filename)[position]);
 
+        //check location
+        defaultLocation = new SharedPreferencesManager(this).getSaveLocation();
+
         //set default for file location
-        preference.setSummary(defaultLocation);
+        preference.setSummary(prefs.getString(getString(R.string.savelocation_key), defaultLocation));
 
     }
 
@@ -67,7 +70,7 @@ public class SettingActivity extends PreferenceActivity implements SharedPrefere
                 break;
             case R.string.countdownvaluetittle:
                 ListPreference listCountDown = (ListPreference) findPreference(getString(R.string.countdownValues_key));
-                listCountDown.setSummary(prefs.getString(getString(R.string.countdownValues_key) + " seconds",getResources().getStringArray(R.array.countdownArray)[0]));
+                listCountDown.setSummary(prefs.getString(getString(R.string.countdownValues_key),getResources().getStringArray(R.array.countdownValues)[0]) + " seconds");
                 break;
             case R.string.saveLocation:
                 pref.setSummary(prefs.getString(getString(R.string.savelocation_key),defaultLocation));
