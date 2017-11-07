@@ -39,7 +39,8 @@ public class ScreenshotManager {
     private Intent mIntent;
     private Context context;
 
-    public ScreenshotManager() {
+    public static ScreenshotManager getInstance() {
+        return INSTANCE;
     }
 
     public void requestScreenshotPermission(@NonNull Activity activity, int requestId) {
@@ -58,7 +59,7 @@ public class ScreenshotManager {
     }
 
     @UiThread
-    public boolean takeScreenshot(@NonNull final Context context) {
+    public boolean takeScreenshot(@NonNull final Context context, final String fileName, final String filePath, final String fileType) {
         this.context = context;
         if (mIntent == null)
             return false;
@@ -110,10 +111,10 @@ public class ScreenshotManager {
                         Log.d("AppLog", "Got bitmap?" + (bitmap != null));
                         try {
 
-                            DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH.mm.ss");
+                            DateFormat dateFormat = new SimpleDateFormat(fileName);
                             Date date = new Date();
 
-                            File file = ScreenShott.getInstance().saveScreenshotToPicturesFolder(context, bitmap, dateFormat.format(date));
+                            File file = ImageSaver.getInstance().saveScreenshotToPicturesFolder(context, bitmap, dateFormat.format(date),filePath,fileType);
 
                             Toast.makeText(context, "Saved " + file.getName() +"", Toast.LENGTH_SHORT).show();
                             Log.d("ServiceCapture", "File != null");

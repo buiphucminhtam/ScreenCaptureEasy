@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.PixelFormat;
 import android.os.CountDownTimer;
+import android.os.Environment;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.Gravity;
@@ -17,13 +18,15 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 
+import java.io.File;
+
 import safety.com.br.android_shake_detector.core.ShakeCallback;
 import safety.com.br.android_shake_detector.core.ShakeDetector;
 import safety.com.br.android_shake_detector.core.ShakeOptions;
 
 public class ServiceCapture extends Service {
     private View rootView;
-    private final String ACTION_SCREEN_CAPTURE_NOTIFICATION = "NOTIFICATION";
+
 
     public static ScreenshotManager screenshotManager;
 
@@ -31,6 +34,13 @@ public class ServiceCapture extends Service {
     private WindowManager mWindowManager;
 
     private ShakeDetector shakeDetector;
+
+    private boolean saveSilently = false;
+    private long countDownValue = 0;
+    private final long delayOverlayIcon = 2000;
+    private String fileName = "yyyyMMdd_hhmmss";
+    private String filePath = Const.defaultLocation;
+    private String fileType = "PNG";
 
     public ServiceCapture() {
     }
@@ -49,6 +59,34 @@ public class ServiceCapture extends Service {
 
     @Override
     public int onStartCommand(Intent intent,  int flags, int startId) {
+
+        if(intent == null || intent.getAction() == null) return START_STICKY;
+
+        if (intent.getAction().equals(Const.ACTION_INIT)) {
+            initScreenShoot(intent);
+        }else
+            if (intent.getAction().equals(Const.ACTION_SCREEN_CAPTURE_NOTIFICATION)) {
+                startCaptureScreen();
+            }
+        else
+            if (intent.getAction().equals(Const.ACTION_RUN_MAINACTIVITY)) {
+                startActivity(new Intent(this,MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            }
+
+
+
+
+        return START_STICKY;
+    }
+
+    private void initScreenShoot(Intent intent) {
+
+        //get values
+        saveSilently = intent.getBooleanExtra(getString(R.string.savesilently_key), false);
+        countDownValue = Long.parseLong(intent.getStringExtra(getString(R.string.countdownValues_key)));
+        fileName = intent.getStringExtra(getString(R.string.filename_key));
+        filePath = intent.getStringExtra(getString(R.string.savelocation_key));
+        filePath = intent.getStringExtra(getString(R.string.filetype_key));
 
         //check icon
         if (intent.getBooleanExtra(getApplicationContext().getString(R.string.save_notification_icon), false)) {
@@ -71,21 +109,23 @@ public class ServiceCapture extends Service {
             shakeDetector = new ShakeDetector(options).start(this, new ShakeCallback() {
                 @Override
                 public void onShake() {
-                    if (mWindowManager != null) {
-                        mWindowManager.removeView(overlayIcon);
-                        screenshotManager.takeScreenshot(getApplicationContext());
-                        new CountDownTimer(2000, 1000) {
-                            @Override
-                            public void onTick(long l) {
+//                    if (mWindowManager != null) {
+//                        mWindowManager.removeView(overlayIcon);
+//                        screenshotManager.takeScreenshot(getApplicationContext(),fileName,filePath,fileType);
+//                        new CountDownTimer(delayOverlayIcon, 1000) {
+//                            @Override
+//                            public void onTick(long l) {
+//
+//                            }
+//
+//                            @Override
+//                            public void onFinish() {
+//                                mWindowManager.addView(overlayIcon,params);
+//                            }
+//                        }.start();
+//                    }
 
-                            }
-
-                            @Override
-                            public void onFinish() {
-                                mWindowManager.addView(overlayIcon,params);
-                            }
-                        }.start();
-                    }
+                    startCaptureScreen();
                 }
             });
         }
@@ -97,50 +137,39 @@ public class ServiceCapture extends Service {
             filter.addAction(Intent.ACTION_PACKAGE_ADDED);
             registerReceiver(receiver, filter);
         }
+    }
 
-
-        Log.d("ServiceCapture", "TAKE SCREEN SHOT");
-        if (intent.getAction() != null) {
-            if (intent.getAction().equals(ACTION_SCREEN_CAPTURE_NOTIFICATION)) {
-                if (mWindowManager != null) {
-                    mWindowManager.removeView(overlayIcon);
-                }
-
-
-                new CountDownTimer(2000, 1000) {
-                    @Override
-                    public void onTick(long l) {
-
-                    }
-
-                    @Override
-                    public void onFinish() {
-                        screenshotManager.takeScreenshot(getApplicationContext());
-                    }
-                }.start();
-
-
-                new CountDownTimer(2000, 1000) {
-                    @Override
-                    public void onTick(long l) {
-
-                    }
-
-                    @Override
-                    public void onFinish() {
-                        mWindowManager.addView(overlayIcon,params);
-                    }
-                }.start();
-                Log.d("ServiceCapture", ACTION_SCREEN_CAPTURE_NOTIFICATION);
-            }
-
-            if (intent.getAction().equals(Intent.ACTION_MAIN)) {
-                startActivity(new Intent(this,MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-            }
+    private void startCaptureScreen() {
+        if (mWindowManager != null) {
+            mWindowManager.removeView(overlayIcon);
         }
 
 
-        return super.onStartCommand(intent, flags, startId);
+        new CountDownTimer(countDownValue, 1000) {
+            @Override
+            public void onTick(long l) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                screenshotManager.takeScreenshot(getApplicationContext(),fileName,filePath,fileType);
+            }
+        }.start();
+
+
+        new CountDownTimer(delayOverlayIcon, 1000) {
+            @Override
+            public void onTick(long l) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                mWindowManager.addView(overlayIcon,params);
+            }
+        }.start();
+        Log.d("ServiceCapture", Const.ACTION_SCREEN_CAPTURE_NOTIFICATION);
     }
 
 //    public void takeScreenShot() {
@@ -164,7 +193,7 @@ public class ServiceCapture extends Service {
         // Create intent that will bring our app to the front, as if it was tapped in the app
         // launcher
         Intent showTaskIntent = new Intent(getApplicationContext(), ServiceCapture.class);
-        showTaskIntent.setAction(ACTION_SCREEN_CAPTURE_NOTIFICATION);
+        showTaskIntent.setAction(Const.ACTION_SCREEN_CAPTURE_NOTIFICATION);
         showTaskIntent.addCategory(Intent.CATEGORY_LAUNCHER);
         showTaskIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
@@ -260,19 +289,21 @@ public class ServiceCapture extends Service {
                         //The check for Xdiff <10 && YDiff< 10 because sometime elements moves a little while clicking.
                         //So that is click event.
                         if (Xdiff < 10 && Ydiff < 10) {
-                            mWindowManager.removeView(overlayIcon);
-                            screenshotManager.takeScreenshot(getApplicationContext());
-                            new CountDownTimer(2000, 1000) {
-                                @Override
-                                public void onTick(long l) {
+//                            mWindowManager.removeView(overlayIcon);
+//                            screenshotManager.takeScreenshot(getApplicationContext());
+//                            new CountDownTimer(2000, 1000) {
+//                                @Override
+//                                public void onTick(long l) {
+//
+//                                }
+//
+//                                @Override
+//                                public void onFinish() {
+//                                    mWindowManager.addView(overlayIcon,params);
+//                                }
+//                            }.start();
 
-                                }
-
-                                @Override
-                                public void onFinish() {
-                                    mWindowManager.addView(overlayIcon,params);
-                                }
-                            }.start();
+                            startCaptureScreen();
                         }
                         return true;
                     case MotionEvent.ACTION_MOVE:
@@ -295,7 +326,7 @@ public class ServiceCapture extends Service {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if(action.equals(intent.ACTION_CAMERA_BUTTON)){
-                screenshotManager.takeScreenshot(context);
+                startCaptureScreen();
             }
         }
     };

@@ -1,11 +1,19 @@
 package com.minhtam.screencaptureeasy;
 
+import android.Manifest;
+import android.app.ActivityManager;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 
 import com.github.angads25.filepicker.view.FilePickerPreference;
 
@@ -14,7 +22,7 @@ import java.io.File;
 public class SettingActivity extends PreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private SharedPreferences prefs;
-    private final String defaultLocation = Environment.DIRECTORY_PICTURES + File.separator;
+    private final String defaultLocation = Const.defaultLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,5 +93,16 @@ public class SettingActivity extends PreferenceActivity implements SharedPrefere
         super.onResume();
         getPreferenceScreen().getSharedPreferences()
                 .registerOnSharedPreferenceChangeListener(this);
+    }
+
+    //Method to check if the service is running
+    private boolean isServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

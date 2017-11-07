@@ -1,5 +1,7 @@
 package com.minhtam.screencaptureeasy;
 
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -68,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
             btnStart.setText(getString(R.string.start));
         }
 
-        screenshotManager = new ScreenshotManager();
+        screenshotManager = ScreenshotManager.getInstance();
 
     }
 
@@ -88,6 +90,11 @@ public class MainActivity extends AppCompatActivity {
                     i.putExtra(getString(R.string.save_overlay_icon), swOverlayIcon.isChecked());
                     i.putExtra(getString(R.string.save_camera_button), swCameraButton.isChecked());
                     i.putExtra(getString(R.string.save_shake), swShake.isChecked());
+                    i.putExtra(getString(R.string.savesilently_key), sharedPreferencesManager.getSaveSilently());
+                    i.putExtra(getString(R.string.countdownValues_key), sharedPreferencesManager.getCountDown());
+                    i.putExtra(getString(R.string.filename_key), sharedPreferencesManager.getFileName());
+                    i.putExtra(getString(R.string.savelocation_key), sharedPreferencesManager.getSaveLocation());
+                    i.putExtra(getString(R.string.filetype_key), "PNG");
                     startService(i);
                     ServiceCapture.screenshotManager = screenshotManager;
 

@@ -49,4 +49,24 @@ public class SharedPreferencesManager {
     public boolean getIsStart() {
         return sharedPreferences.getBoolean(activity.getString(R.string.save_state), false);
     }
+
+    public boolean getSaveSilently() {
+        return sharedPreferences.getBoolean(activity.getString(R.string.savesilently_key), false);
+    }
+
+    public int getCountDown() {
+        if (sharedPreferences.getBoolean(activity.getString(R.string.countdown_key), false)) {
+            return Integer.parseInt(activity.getString(R.string.countdownValues_key));
+        } else {
+            return 0;
+        }
+    }
+
+    public String getSaveLocation() {
+        return sharedPreferences.getString(activity.getString(R.string.savelocation_key),Const.defaultLocation);
+    }
+
+    public String getFileName() {
+        return sharedPreferences.getString(activity.getString(R.string.filename_key),activity.getResources().getStringArray(R.array.filename)[0]);
+    }
 }
