@@ -1,40 +1,41 @@
-package com.minhtam.screencaptureeasy;
+package com.minhtam.screencaptureeasy.Activity;
 
-import android.Manifest;
 import android.app.ActivityManager;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Environment;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+import android.util.Log;
 
 import com.github.angads25.filepicker.view.FilePickerPreference;
-
-import java.io.File;
+import com.minhtam.screencaptureeasy.R;
+import com.minhtam.screencaptureeasy.Util.SharedPreferencesManager;
 
 public class SettingActivity extends PreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private SharedPreferences prefs;
     private String defaultLocation;
+    private SharedPreferencesManager sharedPreferencesManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPreferencesManager = new SharedPreferencesManager(this);
+        setTheme();
+
         addPreferencesFromResource(R.xml.setting);
-
         prefs = getPreferenceScreen().getSharedPreferences();
-
         ListPreference listCountDown = (ListPreference) findPreference(getString(R.string.countdownValues_key));
         ListPreference listThemes = (ListPreference) findPreference(getString(R.string.theme_key));
         ListPreference listFileName = (ListPreference) findPreference(getString(R.string.filename_key));
         FilePickerPreference preference = (FilePickerPreference) findPreference(getString(R.string.savelocation_key));
+        ListPreference listLanguage = (ListPreference) findPreference(getString(R.string.language_key));
+
+        //set default lang
+        listLanguage.setSummary(prefs.getString(getString(R.string.language_key),getResources().getStringArray(R.array.languageValues)[1]));
 
         //check count down to hide, show list cd
         if (prefs.getBoolean(getString(R.string.countdown_key), false)) {
@@ -47,6 +48,7 @@ public class SettingActivity extends PreferenceActivity implements SharedPrefere
 
         String value = prefs.getString(getString(R.string.filename_key),getResources().getStringArray(R.array.filename_values)[0]);
         int position = Integer.parseInt(value);
+        Log.d("Test", position + "");
         listFileName.setSummary(getResources().getStringArray(R.array.filename)[position]);
 
         //check location
@@ -55,6 +57,20 @@ public class SettingActivity extends PreferenceActivity implements SharedPrefere
         //set default for file location
         preference.setSummary(prefs.getString(getString(R.string.savelocation_key), defaultLocation));
 
+    }
+
+    private void setTheme() {
+        String[] arrayTheme = getResources().getStringArray(R.array.themeValues);
+
+        if (sharedPreferencesManager.getThemeType().equals(arrayTheme[0])) {
+            setTheme(R.style.LightTheme);
+        } else if (sharedPreferencesManager.getThemeType().equals(arrayTheme[1])) {
+            setTheme(R.style.DarkTheme);
+        } else {
+            if (sharedPreferencesManager.getThemeType().equals(arrayTheme[2])) {
+                setTheme(R.style.BlackTheme);
+            }
+        }
     }
 
     @Override
@@ -71,6 +87,14 @@ public class SettingActivity extends PreferenceActivity implements SharedPrefere
             case R.string.countdownvaluetittle:
                 ListPreference listCountDown = (ListPreference) findPreference(getString(R.string.countdownValues_key));
                 listCountDown.setSummary(prefs.getString(getString(R.string.countdownValues_key),getResources().getStringArray(R.array.countdownValues)[0]) + " seconds");
+                break;
+            case R.string.countdown:
+                ListPreference listcd = (ListPreference) findPreference(getString(R.string.countdownValues_key));
+                if (prefs.getBoolean(getString(R.string.countdown_key), false)) {
+                    listcd.setSummary(prefs.getString(getString(R.string.countdownValues_key),getResources().getStringArray(R.array.countdownValues)[0]) + " seconds");
+                } else {
+                    listcd.setSummary(getResources().getStringArray(R.array.countdownArray)[0]);
+                }
                 break;
             case R.string.saveLocation:
                 pref.setSummary(prefs.getString(getString(R.string.savelocation_key),defaultLocation));
@@ -107,5 +131,12 @@ public class SettingActivity extends PreferenceActivity implements SharedPrefere
             }
         }
         return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(this,MainActivity.class));
+        finish();
     }
 }

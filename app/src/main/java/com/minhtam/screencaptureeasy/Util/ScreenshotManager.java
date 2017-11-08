@@ -1,4 +1,4 @@
-package com.minhtam.screencaptureeasy;
+package com.minhtam.screencaptureeasy.Util;
 
 import android.app.Activity;
 import android.content.Context;
@@ -26,8 +26,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import github.nisrulz.screenshott.ScreenShott;
-
 /**
  * Created by Tam on 10/18/2017.
  */
@@ -37,7 +35,6 @@ public class ScreenshotManager {
     private static final int VIRTUAL_DISPLAY_FLAGS = DisplayManager.VIRTUAL_DISPLAY_FLAG_OWN_CONTENT_ONLY | DisplayManager.VIRTUAL_DISPLAY_FLAG_PUBLIC;
     public static final ScreenshotManager INSTANCE = new ScreenshotManager();
     private Intent mIntent;
-    private Context context;
 
     public static ScreenshotManager getInstance() {
         return INSTANCE;
@@ -60,7 +57,6 @@ public class ScreenshotManager {
 
     @UiThread
     public boolean takeScreenshot(@NonNull final Context context, final String fileName, final String filePath, final String fileType) {
-        this.context = context;
         if (mIntent == null)
             return false;
         final MediaProjectionManager mediaProjectionManager = (MediaProjectionManager) context.getSystemService(Context.MEDIA_PROJECTION_SERVICE);

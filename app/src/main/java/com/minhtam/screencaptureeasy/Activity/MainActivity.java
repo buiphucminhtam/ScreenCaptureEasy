@@ -1,15 +1,13 @@
-package com.minhtam.screencaptureeasy;
+package com.minhtam.screencaptureeasy.Activity;
 
-import android.Manifest;
 import android.app.ActivityManager;
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -17,6 +15,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
+
+import com.minhtam.screencaptureeasy.Const;
+import com.minhtam.screencaptureeasy.R;
+import com.minhtam.screencaptureeasy.Service.ServiceCapture;
+import com.minhtam.screencaptureeasy.Util.SharedPreferencesManager;
+import com.minhtam.screencaptureeasy.Util.ScreenshotManager;
 
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_WRITE_PERMISSION = 786;
@@ -28,16 +32,30 @@ public class MainActivity extends AppCompatActivity {
 
     private SharedPreferencesManager sharedPreferencesManager;
 
-    private boolean isStart = false;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPreferencesManager = new SharedPreferencesManager(this);
+        setTheme();
         setContentView(R.layout.activity_main);
 
         requestPermission();
         AddControl();
         AddEvent();
+    }
+
+    private void setTheme() {
+        String[] arrayTheme = getResources().getStringArray(R.array.themeValues);
+
+        if (sharedPreferencesManager.getThemeType().equals(arrayTheme[0])) {
+            setTheme(R.style.LightTheme);
+        } else if (sharedPreferencesManager.getThemeType().equals(arrayTheme[1])) {
+            setTheme(R.style.DarkTheme);
+        } else {
+            if (sharedPreferencesManager.getThemeType().equals(arrayTheme[2])) {
+                setTheme(R.style.BlackTheme);
+            }
+        }
     }
 
     @Override
@@ -66,8 +84,6 @@ public class MainActivity extends AppCompatActivity {
         swCameraButton = (Switch) findViewById(R.id.swcamerabutton);
         swShake = (Switch) findViewById(R.id.swshake);
 
-        sharedPreferencesManager = new SharedPreferencesManager(this);
-
         swNotificationIcon.setChecked(sharedPreferencesManager.getNotificationMode());
         swOverlayIcon.setChecked(sharedPreferencesManager.getOverlayIconMode());
         swCameraButton.setChecked(sharedPreferencesManager.getCameraButtonMode());
@@ -95,31 +111,14 @@ public class MainActivity extends AppCompatActivity {
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!isStart) {
-                    isStart = true;
+                if (!isServiceRunning(ServiceCapture.class)) {
+
+                    sharedPreferencesManager.saveSetting(swNotificationIcon.isChecked(),swOverlayIcon.isChecked(),swCameraButton.isChecked(),swShake.isChecked());
 
                     screenshotManager.requestScreenshotPermission(MainActivity.this, 1);
-
-                    Intent i = new Intent(MainActivity.this, ServiceCapture.class);
-                    i.putExtra(getString(R.string.save_notification_icon), swNotificationIcon.isChecked());
-                    i.putExtra(getString(R.string.save_overlay_icon), swOverlayIcon.isChecked());
-                    i.putExtra(getString(R.string.save_camera_button), swCameraButton.isChecked());
-                    i.putExtra(getString(R.string.save_shake), swShake.isChecked());
-                    i.putExtra(getString(R.string.savesilently_key), sharedPreferencesManager.getSaveSilently());
-                    i.putExtra(getString(R.string.countdownValues_key), sharedPreferencesManager.getCountDown());
-                    i.putExtra(getString(R.string.filename_key), sharedPreferencesManager.getFileName());
-                    //check location internal or external
-                    i.putExtra(getString(R.string.savelocation_key), sharedPreferencesManager.getSaveLocation());
-                    i.putExtra(getString(R.string.filetype_key), "PNG");
-
-                    //set action
-                    i.setAction(Const.ACTION_INIT);
-                    startService(i);
-                    ServiceCapture.screenshotManager = screenshotManager;
-
+                    startServiceCapture();
                     btnStart.setText(getString(R.string.stop));
                 } else {
-                    isStart = false;
                     btnStart.setText(getString(R.string.start));
 
                     //stop service
@@ -130,6 +129,24 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void startServiceCapture() {
+        Intent i = new Intent(MainActivity.this, ServiceCapture.class);
+        i.putExtra(getString(R.string.save_notification_icon), swNotificationIcon.isChecked());
+        i.putExtra(getString(R.string.save_overlay_icon), swOverlayIcon.isChecked());
+        i.putExtra(getString(R.string.save_camera_button), swCameraButton.isChecked());
+        i.putExtra(getString(R.string.save_shake), swShake.isChecked());
+        i.putExtra(getString(R.string.savesilently_key), sharedPreferencesManager.getSaveSilently());
+        i.putExtra(getString(R.string.countdownValues_key), sharedPreferencesManager.getCountDown());
+        i.putExtra(getString(R.string.filename_key), sharedPreferencesManager.getFileName());
+        //check location internal or external
+        i.putExtra(getString(R.string.savelocation_key), sharedPreferencesManager.getSaveLocation());
+        i.putExtra(getString(R.string.filetype_key), "PNG");
+
+        //set action
+        i.setAction(Const.ACTION_INIT);
+        startService(i);
     }
 
     @Override
@@ -157,10 +174,11 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onStop() {
         super.onStop();
-        sharedPreferencesManager.saveSetting(swNotificationIcon.isChecked(),swOverlayIcon.isChecked(),swCameraButton.isChecked(),swShake.isChecked(),isStart);
+        finish();
     }
 
     //Method to check if the service is running

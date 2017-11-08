@@ -1,4 +1,4 @@
-package com.minhtam.screencaptureeasy;
+package com.minhtam.screencaptureeasy.Service;
 
 import android.app.Notification;
 import android.app.PendingIntent;
@@ -7,9 +7,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.os.CountDownTimer;
-import android.os.Environment;
 import android.os.IBinder;
 import android.util.Log;
 import android.util.TypedValue;
@@ -20,7 +20,11 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import java.io.File;
+import com.minhtam.screencaptureeasy.Activity.ImageViewerActivity;
+import com.minhtam.screencaptureeasy.Const;
+import com.minhtam.screencaptureeasy.Activity.MainActivity;
+import com.minhtam.screencaptureeasy.R;
+import com.minhtam.screencaptureeasy.Util.ScreenshotManager;
 
 import safety.com.br.android_shake_detector.core.ShakeCallback;
 import safety.com.br.android_shake_detector.core.ShakeDetector;
@@ -30,7 +34,7 @@ public class ServiceCapture extends Service {
     private View rootView;
 
 
-    public static ScreenshotManager screenshotManager;
+    public ScreenshotManager screenshotManager;
 
     private View overlayIcon;
     private WindowManager mWindowManager;
@@ -57,6 +61,7 @@ public class ServiceCapture extends Service {
     public void onCreate() {
         super.onCreate();
         Log.d("ServiceCapture", "SERVICE CREATE");
+        screenshotManager = ScreenshotManager.getInstance();
     }
 
     @Override
@@ -82,14 +87,7 @@ public class ServiceCapture extends Service {
     }
 
     private void initScreenShoot(Intent intent) {
-
-        //get values
-        saveSilently = intent.getBooleanExtra(getString(R.string.savesilently_key), false);
-        countDownValue = intent.getIntExtra(getString(R.string.countdownValues_key),1000);
-        fileName = intent.getStringExtra(getString(R.string.filename_key));
-        filePath = intent.getStringExtra(getString(R.string.savelocation_key));
-        fileType = intent.getStringExtra(getString(R.string.filetype_key));
-
+        getValue(intent);
         //check icon
         if (intent.getBooleanExtra(getApplicationContext().getString(R.string.save_notification_icon), false)) {
             showForegroundNotificationMode1(getApplicationContext().getString(R.string.taptoscreenshot));
@@ -141,6 +139,16 @@ public class ServiceCapture extends Service {
         }
     }
 
+    private void getValue(Intent intent) {
+        //get values
+        saveSilently = intent.getBooleanExtra(getString(R.string.savesilently_key), false);
+        countDownValue = intent.getIntExtra(getString(R.string.countdownValues_key),1000);
+        countDownValue  = countDownValue < 1000 ? countDownValue * 1000 : countDownValue;
+        fileName = intent.getStringExtra(getString(R.string.filename_key));
+        filePath = intent.getStringExtra(getString(R.string.savelocation_key));
+        fileType = intent.getStringExtra(getString(R.string.filetype_key));
+    }
+
 
     private TextView tvCountDown;
     private WindowManager.LayoutParams tvParams;
@@ -150,7 +158,8 @@ public class ServiceCapture extends Service {
         }
         if (countDownValue > 1000) {
             tvCountDown = new TextView(getApplicationContext());
-            tvCountDown.setTextSize(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 25, getResources().getDisplayMetrics()));
+            tvCountDown.setTextSize(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics()));
+            tvCountDown.setTextColor(Color.WHITE);
 
             tvParams = new WindowManager.LayoutParams(
                     WindowManager.LayoutParams.WRAP_CONTENT,
@@ -159,36 +168,54 @@ public class ServiceCapture extends Service {
                     WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
                     PixelFormat.TRANSLUCENT);
 
+            tvParams.gravity = Gravity.CENTER;
+
             mWindowManager.addView(tvCountDown,tvParams);
         }
 
-        new CountDownTimer(countDownValue, 1000) {
+        new CountDownTimer(countDownValue+1000, 1000) {
             @Override
             public void onTick(long l) {
                 if (countDownValue > 1000) {
-                    tvCountDown.setText(l + "");
-                    mWindowManager.updateViewLayout(tvCountDown,tvParams);
+                    tvCountDown.setText((int)l/1000 + "");
                 }
             }
 
             @Override
             public void onFinish() {
-                screenshotManager.takeScreenshot(getApplicationContext(),fileName,filePath,fileType);
+                mWindowManager.removeView(tvCountDown);
+
+                new CountDownTimer(300, 1000) {
+                    @Override
+                    public void onTick(long l) {
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        screenshotManager.takeScreenshot(getApplicationContext(),fileName,filePath,fileType);
+                    }
+                }.start();
+
+
+                new CountDownTimer(delayOverlayIcon, 1000) {
+                    @Override
+                    public void onTick(long l) {
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        mWindowManager.addView(overlayIcon,params);
+                        if (!saveSilently) {
+                            Intent intentView = new Intent(getApplicationContext(), ImageViewerActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intentView);
+                        }
+                    }
+                }.start();
             }
         }.start();
 
 
-        new CountDownTimer(delayOverlayIcon, 1000) {
-            @Override
-            public void onTick(long l) {
 
-            }
-
-            @Override
-            public void onFinish() {
-                mWindowManager.addView(overlayIcon,params);
-            }
-        }.start();
         Log.d("ServiceCapture", Const.ACTION_SCREEN_CAPTURE_NOTIFICATION);
     }
 
@@ -207,7 +234,6 @@ public class ServiceCapture extends Service {
 //            e.printStackTrace();
 //        }
 //    }
-
 
     private void showForegroundNotificationMode1(String contentText) {
         // Create intent that will bring our app to the front, as if it was tapped in the app
@@ -238,7 +264,7 @@ public class ServiceCapture extends Service {
         // Create intent that will bring our app to the front, as if it was tapped in the app
         // launcher
         Intent showTaskIntent = new Intent(getApplicationContext(), ServiceCapture.class);
-        showTaskIntent.setAction(Intent.ACTION_MAIN);
+        showTaskIntent.setAction(Const.ACTION_RUN_MAINACTIVITY);
         showTaskIntent.addCategory(Intent.CATEGORY_LAUNCHER);
         showTaskIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
@@ -255,7 +281,7 @@ public class ServiceCapture extends Service {
                 .setWhen(System.currentTimeMillis())
                 .setContentIntent(contentIntent)
                 .build();
-        startForeground(1, notification);
+        startForeground(2, notification);
     }
 
     private int initialX;

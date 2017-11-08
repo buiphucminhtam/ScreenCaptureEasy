@@ -1,15 +1,12 @@
-package com.minhtam.screencaptureeasy;
+package com.minhtam.screencaptureeasy.Util;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.media.MediaScannerConnection;
-import android.os.Environment;
 import android.util.Log;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Created by Tam on 11/7/2017.
