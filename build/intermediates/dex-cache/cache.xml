@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="C:\Users\Tam\.android\build-cache\ba3df9fd4a3fb6dfdac3f5339735796b91502b76\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="952944218ecedea1554a513dec0c14d570642843">
+        <dex dex="D:\SVN\ScreenCaptureEasyGit\ScreenCaptureEasy\app\build\intermediates\pre-dexed\debug\classes_fd86005d7c5faec23e75016679f0db2b04767bbe.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\SDK\SDK\sdk\extras\m2repository\com\android\support\constraint\constraint-layout-solver\1.0.2\constraint-layout-solver-1.0.2.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
+        <dex dex="D:\SVN\ScreenCaptureEasyGit\ScreenCaptureEasy\app\build\intermediates\pre-dexed\debug\constraint-layout-solver-1.0.2_fe73e37dd7a7962389d13e19b6f50b349b18a222.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Tam\.android\build-cache\a67b64618db8ab58ed70d8a7162c37044f83bec0\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="fcd01fd11233459f546c437ec927e9b61bf7caf1">
+        <dex dex="D:\SVN\ScreenCaptureEasyGit\ScreenCaptureEasy\app\build\intermediates\pre-dexed\debug\classes_d1e17876b4494a7b045ab02f1cc64121b867f53c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Tam\.android\build-cache\6a8268a723965717061f4bf0c7f9546ebcc45710\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="47471eb19df288158b00b8d9cfa41bce7373f5cc">
+        <dex dex="D:\SVN\ScreenCaptureEasyGit\ScreenCaptureEasy\app\build\intermediates\pre-dexed\debug\classes_65b31e141f86df6bc29e0fb1eebda64c47f8ccb4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Tam\.android\build-cache\fedecd96a12816b4f0b895b61c1f3be0d65dbc0e\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="18d31838aa4fcc768a8a0516e22cc13b94655d89">
+        <dex dex="D:\SVN\ScreenCaptureEasyGit\ScreenCaptureEasy\app\build\intermediates\pre-dexed\debug\classes_05b7396119d833598cc1c881ced9e9766cf99db4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Tam\.android\build-cache\3f2cb7d6ebaa7d52bb641fbc48c907d658ba958d\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="2e92aa0163544a804a0b34f169ca61801770839a">
+        <dex dex="D:\SVN\ScreenCaptureEasyGit\ScreenCaptureEasy\app\build\intermediates\pre-dexed\debug\classes_79d3e236ce592b6e43e77407d1e8b352d09d2389.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Tam\.android\build-cache\d078ab61bcbaa3bd2cdd5372a5d9dc2448d27be9\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="c7fd152c455d73dd61eed2e0c11416d004e3b203">
+        <dex dex="D:\SVN\ScreenCaptureEasyGit\ScreenCaptureEasy\app\build\intermediates\pre-dexed\debug\classes_b62065460f61587a4dac448046c4242d31504180.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Tam\.android\build-cache\fdff7375c9609d35dbc072f55d95b04bf1ea301e\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="88246166d5afb106f532f6e6deae683c66b42c89">
+        <dex dex="D:\SVN\ScreenCaptureEasyGit\ScreenCaptureEasy\app\build\intermediates\pre-dexed\debug\classes_714ab7e5211844877252b9fafc6d9c9ce4589d16.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Tam\.android\build-cache\019f47eb963784435286382449c371a12fddf90a\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="41608af0f80d5829a7a0a7ba4bd47f5c213dd113">
+        <dex dex="D:\SVN\ScreenCaptureEasyGit\ScreenCaptureEasy\app\build\intermediates\pre-dexed\debug\classes_84ffedbb9ecab259e7cb1e97b01f4ca578fbbb65.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Tam\.android\build-cache\a41747250500edbdd70f7246a191d6ba1bb27bee\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="670142f429f3fc489485964d91f3469c78acc9cb">
+        <dex dex="D:\SVN\ScreenCaptureEasyGit\ScreenCaptureEasy\app\build\intermediates\pre-dexed\debug\classes_4d844c9996b2e2a81878cb5bb6533dc9ecd801f1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Tam\.android\build-cache\561ffbd3feb37fa52f71b903726ff7b65edd5f23\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="9935891f23923f39d002087085d9696568a9f657">
+        <dex dex="D:\SVN\ScreenCaptureEasyGit\ScreenCaptureEasy\app\build\intermediates\pre-dexed\debug\classes_fff7bcde61c667767b72dc4b742b54c41f2928bc.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Tam\.android\build-cache\58ebf5205aef8082bde9d86e2632c4078567f225\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="c4f45092eee6cdf1a5dbd597b2b6819be652ce2e">
+        <dex dex="D:\SVN\ScreenCaptureEasyGit\ScreenCaptureEasy\app\build\intermediates\pre-dexed\debug\classes_8facb5df9fb751163f25e83fdd7c4620a0c5ca21.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\SDK\SDK\sdk\extras\android\m2repository\com\android\support\support-annotations\26.0.0-alpha1\support-annotations-26.0.0-alpha1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="023ee503b631f69511e335a061ea008f8da60f40">
+        <dex dex="D:\SVN\ScreenCaptureEasyGit\ScreenCaptureEasy\app\build\intermediates\pre-dexed\debug\support-annotations-26.0.0-alpha1_e9679de0db88c432f13878398b91c58a90594dab.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Tam\.android\build-cache\35e2c097ed7f7be538176a953140bf20743f515b\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="8df0e365e40beb151bc42dee20817721a6cab7b0">
+        <dex dex="D:\SVN\ScreenCaptureEasyGit\ScreenCaptureEasy\app\build\intermediates\pre-dexed\debug\classes_a3decc148c77a99a9824297b1245686f7f66ab88.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Tam\.android\build-cache\a237157a232f934d8a4b27d71f90de293bdc6005\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="D:\SVN\ScreenCaptureEasyGit\ScreenCaptureEasy\app\build\intermediates\pre-dexed\debug\classes_e19dd8f98fb273d47e99187aaeba2bdc7e853e80.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Tam\.android\build-cache\9a06e21cde56ab787ff2b633b36f75eb5f664d6b\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="e176fd06c2ad5b50a2f5cb4de6000a83a7cb48f5">
+        <dex dex="D:\SVN\ScreenCaptureEasyGit\ScreenCaptureEasy\app\build\intermediates\pre-dexed\debug\classes_f335fafad13088596b2b4f8e2d4348749f3446de.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Tam\.android\build-cache\3a9db0e2751411902f87d8ab3455af521ef713f5\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="44ee06abb66da30f5855e6bf54574e64cdcd982a">
+        <dex dex="D:\SVN\ScreenCaptureEasyGit\ScreenCaptureEasy\app\build\intermediates\pre-dexed\debug\classes_53c09d2611b725accb28595b2def09fad3ee8e2e.jar" />
+    </item>
+
+</items>
