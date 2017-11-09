@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="ImageItemHeight">271dp</dimen>
+    <dimen name="ImageItemWidth">435dp</dimen>
+    <dimen name="switchHeight">18dp</dimen>
+    <dimen name="margin20dp">18dp</dimen>
+    <dimen name="margin10dp">9dp</dimen>
+    <dimen name="widthMainImage">435dp</dimen>
+    <dimen name="heightMainImage">271dp</dimen>
+    <dimen name="chatheadWidth">54dp</dimen>
+    <dimen name="chatheadHeight">54dp</dimen>
+</resources>

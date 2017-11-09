@@ -2,4 +2,11 @@
 <resources>
     <dimen name="ImageItemHeight">300dp</dimen>
     <dimen name="ImageItemWidth">480dp</dimen>
+    <dimen name="switchHeight">20dp</dimen>
+    <dimen name="margin20dp">20dp</dimen>
+    <dimen name="margin10dp">10dp</dimen>
+    <dimen name="widthMainImage">480dp</dimen>
+    <dimen name="heightMainImage">300dp</dimen>
+    <dimen name="chatheadWidth">60dp</dimen>
+    <dimen name="chatheadHeight">60dp</dimen>
 </resources>

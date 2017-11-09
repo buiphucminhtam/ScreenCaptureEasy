@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ScreenCaptureEasy</string>
+    <string name="camera_button">Nút máy ảnh</string>
+    <string name="fileName">Tên ảnh</string>
+    <string name="language">Ngôn ngữ</string>
+    <string name="notification_icon">Biểu tượng thông báo</string>
+    <string name="overlay_icon">Biểu tượng lớp phủ</string>
+    <string name="prefGeneralTittle">Tổng quan</string>
+    <string name="prefImageFormat">Loại hình</string>
+    <string name="prefLayoutTittle">Bố trí</string>
+    <string name="prefNotificationTittle">Thông báo</string>
+    <string name="prefStorageTittle">Lưu trữ</string>
+    <string name="prefTimeoutTittle">Đếm ngược</string>
+    <string name="running">Đang hoạt động</string>
+    <string name="saveLocation">Vị trí lưu</string>
+    <string name="saveSilentlyTittle">Lưu yên lặng</string>
+    <string name="shake">Lắc</string>
+    <string name="selectdirectories">Chọn thư mục lưu</string>
+    <string name="start">Bắt đầu</string>
+    <string name="startOnBoot">Chạy khi khởi động</string>
+    <string name="stop">Dừng</string>
+    <string name="taptoscreenshot">Chạm để chụp</string>
+    <string name="theme">Giao diện</string>
+    <string name="theme_key"></string>
+    <string name="vibrate">Run</string>
+</resources>

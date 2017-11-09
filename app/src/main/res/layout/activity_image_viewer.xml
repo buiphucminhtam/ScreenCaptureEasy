@@ -11,13 +11,13 @@
     <RelativeLayout
         android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/ImageItemHeight">
+        android:layout_height="@dimen/heightMainImage">
 
         <ImageView
             android:id="@+id/imvMain"
             android:layout_gravity="center"
-            android:layout_width="@dimen/ImageItemWidth"
-            android:layout_height="@dimen/ImageItemHeight" />
+            android:layout_width="@dimen/widthMainImage"
+            android:layout_height="@dimen/heightMainImage" />
 
     </RelativeLayout>
 
@@ -25,7 +25,7 @@
     <android.support.v7.widget.RecyclerView
         android:orientation="horizontal"
         android:id="@+id/rvListImages"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/margin10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </android.support.v7.widget.RecyclerView>
