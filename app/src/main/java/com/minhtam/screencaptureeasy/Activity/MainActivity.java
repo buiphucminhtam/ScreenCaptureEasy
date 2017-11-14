@@ -1,10 +1,8 @@
 package com.minhtam.screencaptureeasy.Activity;
 
 import android.app.ActivityManager;
-import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,8 +17,8 @@ import android.widget.Switch;
 import com.minhtam.screencaptureeasy.Const;
 import com.minhtam.screencaptureeasy.R;
 import com.minhtam.screencaptureeasy.Service.ServiceCapture;
-import com.minhtam.screencaptureeasy.Util.SharedPreferencesManager;
 import com.minhtam.screencaptureeasy.Util.ScreenshotManager;
+import com.minhtam.screencaptureeasy.Util.SharedPreferencesManager;
 
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_WRITE_PERMISSION = 786;
@@ -158,7 +156,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void requestPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_WRITE_PERMISSION);
+            if(checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED )
+             requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_WRITE_PERMISSION);
             Log.d("Permission","not granted");
         } else {
             Log.d("Permission","granted");
@@ -167,8 +166,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        if (requestCode == REQUEST_WRITE_PERMISSION && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            Log.d("Permission","granted");
+        if (requestCode == REQUEST_WRITE_PERMISSION) {
+            if(grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                    Log.d("Permission","granted");
         }
     }
 
