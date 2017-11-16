@@ -1,5 +1,6 @@
 package com.minhtam.screencaptureeasy.Activity;
 
+import android.Manifest;
 import android.app.ActivityManager;
 import android.app.Service;
 import android.content.Context;
@@ -38,9 +39,14 @@ public class MainActivity extends AppCompatActivity {
         sharedPreferencesManager = new SharedPreferencesManager(this);
         setTheme();
         setContentView(R.layout.activity_main);
-
-        requestPermission();
+        //check permission for require
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkPermission()) {
+                requestPermission();
+            }
+        }
         AddControl();
+
         AddEvent();
     }
 
@@ -155,6 +161,13 @@ public class MainActivity extends AppCompatActivity {
         screenshotManager.onActivityResult(resultCode,data);
     }
 
+    private boolean checkPermission() {
+        if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        }
+        return false;
+    }
+
 
     private void requestPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -167,8 +180,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        if (requestCode == REQUEST_WRITE_PERMISSION && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            Log.d("Permission","granted");
+        if (requestCode == REQUEST_WRITE_PERMISSION) {
+            if(grantResults.length>0)
+                if(grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                     Log.d("Permission","granted");
         }
     }
 

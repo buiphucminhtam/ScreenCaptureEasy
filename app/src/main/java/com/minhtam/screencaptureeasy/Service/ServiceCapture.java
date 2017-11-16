@@ -183,7 +183,7 @@ public class ServiceCapture extends Service {
 
             @Override
             public void onFinish() {
-                mWindowManager.removeView(tvCountDown);
+                if(countDownValue > 1000) mWindowManager.removeView(tvCountDown);
 
                 new CountDownTimer(300, 1000) {
                     @Override
