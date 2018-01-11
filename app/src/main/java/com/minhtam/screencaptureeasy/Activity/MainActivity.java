@@ -1,8 +1,11 @@
 package com.minhtam.screencaptureeasy.Activity;
 
+import android.Manifest;
 import android.app.ActivityManager;
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,8 +20,8 @@ import android.widget.Switch;
 import com.minhtam.screencaptureeasy.Const;
 import com.minhtam.screencaptureeasy.R;
 import com.minhtam.screencaptureeasy.Service.ServiceCapture;
-import com.minhtam.screencaptureeasy.Util.ScreenshotManager;
 import com.minhtam.screencaptureeasy.Util.SharedPreferencesManager;
+import com.minhtam.screencaptureeasy.Util.ScreenshotManager;
 
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_WRITE_PERMISSION = 786;
@@ -36,9 +39,14 @@ public class MainActivity extends AppCompatActivity {
         sharedPreferencesManager = new SharedPreferencesManager(this);
         setTheme();
         setContentView(R.layout.activity_main);
-
-        requestPermission();
+        //check permission for require
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkPermission()) {
+                requestPermission();
+            }
+        }
         AddControl();
+
         AddEvent();
     }
 
@@ -162,11 +170,17 @@ public class MainActivity extends AppCompatActivity {
         screenshotManager.onActivityResult(resultCode,data);
     }
 
+    private boolean checkPermission() {
+        if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        }
+        return false;
+    }
+
 
     private void requestPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if(checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED )
-             requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_WRITE_PERMISSION);
+            requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_WRITE_PERMISSION);
             Log.d("Permission","not granted");
         } else {
             Log.d("Permission","granted");
@@ -176,8 +190,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         if (requestCode == REQUEST_WRITE_PERMISSION) {
-            if(grantResults[0] == PackageManager.PERMISSION_GRANTED)
-                    Log.d("Permission","granted");
+            if(grantResults.length>0)
+                if(grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                     Log.d("Permission","granted");
         }
     }
 
