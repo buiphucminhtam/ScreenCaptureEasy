@@ -1,7 +1,7 @@
 package com.minhtam.screencaptureeasy.Adapter;
 
 import android.content.Context;
-import android.net.Uri;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import com.minhtam.screencaptureeasy.Interface.OnItemClickListener;
 import com.minhtam.screencaptureeasy.R;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.List;
@@ -40,7 +41,9 @@ public class AdapterImage extends RecyclerView.Adapter<AdapterImage.ViewHolder> 
 
     @Override
     public void onBindViewHolder(AdapterImage.ViewHolder holder, int position) {
-        holder.imvItem.setImageURI(Uri.fromFile(new File(listPathImages.get(position))));
+        CardView cardView = (CardView) holder.itemView;
+        cardView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT));
+        Picasso.with(context).load(new File(listPathImages.get(position))).into(holder.imvItem);
     }
 
     @Override

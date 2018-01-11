@@ -34,9 +34,16 @@ public class ImageSaver {
 
         fos.close();
 
-        // Initiate media scanning to make the image available in gallery apps
-        MediaScannerConnection.scanFile(context, new String[] { bitmapFile.getPath() },
-                new String[] { "image/jpeg" }, null);
+        if (imageFormat.equals("PNG")) {
+            // Initiate media scanning to make the image available in gallery apps
+            MediaScannerConnection.scanFile(context, new String[] { bitmapFile.getPath() },
+                    new String[] { "image/png" }, null);
+        } else {
+            // Initiate media scanning to make the image available in gallery apps
+            MediaScannerConnection.scanFile(context, new String[] { bitmapFile.getPath() },
+                    new String[] { "image/jpeg" }, null);
+        }
+
         return bitmapFile;
     }
 

@@ -9,4 +9,6 @@
     <dimen name="heightMainImage">487dp</dimen>
     <dimen name="chatheadWidth">97dp</dimen>
     <dimen name="chatheadHeight">97dp</dimen>
+    <dimen name="widthItemImage">227dp</dimen>
+    <dimen name="padding2dp">3dp</dimen>
 </resources>

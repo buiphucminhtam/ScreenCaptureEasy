@@ -58,7 +58,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuItem item = menu.add(1, 1, 1, "Setting");
+        MenuItem itemList = menu.add(1, 1, 1, "List Image");
+
+        itemList.setIcon(R.drawable.ic_view_list_white_24dp);
+        itemList.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+
+
+        MenuItem item = menu.add(1, 1, 2, "Setting");
 
         item.setIcon(R.drawable.ic_settings_white_24dp);
         item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
@@ -69,6 +75,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == 1) {
+            Intent intent = new Intent(MainActivity.this, ImageViewerActivity.class);
+            startActivity(intent);
+        } else {
             Intent intent = new Intent(MainActivity.this, SettingActivity.class);
             startActivity(intent);
         }

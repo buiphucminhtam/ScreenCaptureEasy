@@ -47,6 +47,7 @@ public class ServiceCapture extends Service {
     private String fileName = "yyyyMMdd_hhmmss";
     private String filePath = Const.defaultLocationSDCard;
     private String fileType = "PNG";
+    private boolean overlayIsShowing = false;
 
     public ServiceCapture() {
     }
@@ -154,7 +155,10 @@ public class ServiceCapture extends Service {
     private WindowManager.LayoutParams tvParams;
     private void startCaptureScreen() {
         if (mWindowManager != null) {
-            mWindowManager.removeView(overlayIcon);
+            if (overlayIsShowing) {
+                mWindowManager.removeView(overlayIcon);
+                overlayIsShowing = false;
+            }
         }
         if (countDownValue > 1000) {
             tvCountDown = new TextView(getApplicationContext());
@@ -183,7 +187,8 @@ public class ServiceCapture extends Service {
 
             @Override
             public void onFinish() {
-                mWindowManager.removeView(tvCountDown);
+                if (countDownValue > 1000)
+                  mWindowManager.removeView(tvCountDown);
 
                 new CountDownTimer(300, 1000) {
                     @Override
@@ -204,7 +209,10 @@ public class ServiceCapture extends Service {
 
                     @Override
                     public void onFinish() {
-                        mWindowManager.addView(overlayIcon,params);
+                        if (!overlayIsShowing && overlayIcon!=null) {
+                            mWindowManager.addView(overlayIcon,params);
+                            overlayIsShowing = true;
+                        }
                         if (!saveSilently) {
                             Intent intentView = new Intent(getApplicationContext(), ImageViewerActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intentView);
@@ -277,7 +285,7 @@ public class ServiceCapture extends Service {
         Notification notification = new Notification.Builder(getApplicationContext())
                 .setContentTitle(getString(R.string.app_name))
                 .setContentText(contentText)
-                .setSmallIcon(android.R.mipmap.sym_def_app_icon)
+                .setSmallIcon(R.drawable.ic_camera_enhance_white)
                 .setWhen(System.currentTimeMillis())
                 .setContentIntent(contentIntent)
                 .build();
@@ -308,6 +316,7 @@ public class ServiceCapture extends Service {
         //Add the view to the window
         mWindowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
         mWindowManager.addView(overlayIcon, params);
+        overlayIsShowing = true;
 
 
 
@@ -378,7 +387,9 @@ public class ServiceCapture extends Service {
     public void onDestroy() {
         super.onDestroy();
 //        unregisterReceiver(receiver);
-        if(overlayIcon!=null)
+        if (overlayIcon != null && overlayIsShowing) {
             mWindowManager.removeView(overlayIcon);
+        }
+
     }
 }

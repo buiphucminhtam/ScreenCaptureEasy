@@ -1,6 +1,5 @@
 package com.minhtam.screencaptureeasy.Util;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -32,7 +31,7 @@ public class SharedPreferencesManager {
         editor.putBoolean(activity.getString(R.string.save_overlay_icon), overlayicon_mode);
         editor.putBoolean(activity.getString(R.string.save_camera_button), camerabutton_mode);
         editor.putBoolean(activity.getString(R.string.save_shake), shake_mode);
-        editor.commit();
+        editor.apply();
     }
 
 

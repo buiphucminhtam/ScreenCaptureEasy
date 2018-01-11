@@ -2,13 +2,12 @@ package com.minhtam.screencaptureeasy.Activity;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
 import com.minhtam.screencaptureeasy.Adapter.AdapterImage;
 import com.minhtam.screencaptureeasy.Interface.OnItemClickListener;
@@ -18,7 +17,6 @@ import com.minhtam.screencaptureeasy.Util.SharedPreferencesManager;
 import java.io.File;
 import java.io.FileFilter;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -78,9 +76,11 @@ public class ImageViewerActivity extends AppCompatActivity {
 
         for (File file : files) {
             if (isImageFile(file.getAbsolutePath())) {
-                listPathImage.add(0,file.getAbsolutePath());
+                listPathImage.add(file.getAbsolutePath());
             }
         }
+
+        Collections.reverse(listPathImage);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapterImage);
         imvMain.setImageURI(Uri.fromFile(new File(listPathImage.get(0))));
