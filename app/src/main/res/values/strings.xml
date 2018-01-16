@@ -45,4 +45,5 @@
     <string name="filename_key">filname</string>
     <string name="countdownvaluetittle"> </string>
     <string name="filetype_key">filetype</string>
+    <string name="started_key">started</string>
 </resources>

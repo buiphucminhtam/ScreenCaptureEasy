@@ -19,7 +19,8 @@ public class StartMyServiceAtBootReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         sharedPreferencesManager = new SharedPreferencesManager(context);
         if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
-            startServiceCapture(context);
+            if(sharedPreferencesManager.getIsStarted())
+                startServiceCapture(context);
         }
     }
 

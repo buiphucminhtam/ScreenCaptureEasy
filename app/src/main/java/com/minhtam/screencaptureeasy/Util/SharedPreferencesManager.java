@@ -34,6 +34,16 @@ public class SharedPreferencesManager {
         editor.apply();
     }
 
+    public void startPressed(boolean value) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(activity.getString(R.string.started_key), value);
+        editor.apply();
+    }
+
+    public boolean getIsStarted(){
+        return sharedPreferences.getBoolean(activity.getString(R.string.started_key),false);
+    }
+
 
     public boolean getNotificationMode() {
         return sharedPreferences.getBoolean(activity.getString(R.string.save_notification_icon),false);

@@ -2,10 +2,8 @@ package com.minhtam.screencaptureeasy.Activity;
 
 import android.Manifest;
 import android.app.ActivityManager;
-import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,8 +18,8 @@ import android.widget.Switch;
 import com.minhtam.screencaptureeasy.Const;
 import com.minhtam.screencaptureeasy.R;
 import com.minhtam.screencaptureeasy.Service.ServiceCapture;
-import com.minhtam.screencaptureeasy.Util.SharedPreferencesManager;
 import com.minhtam.screencaptureeasy.Util.ScreenshotManager;
+import com.minhtam.screencaptureeasy.Util.SharedPreferencesManager;
 
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_WRITE_PERMISSION = 786;
@@ -41,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //check permission for require
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkPermission()) {
+            if (!checkPermission()) {
                 requestPermission();
             }
         }
@@ -72,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         itemList.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
 
-        MenuItem item = menu.add(1, 1, 2, "Setting");
+        MenuItem item = menu.add(2, 2, 2, "Setting");
 
         item.setIcon(R.drawable.ic_settings_white_24dp);
         item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
@@ -133,8 +131,10 @@ public class MainActivity extends AppCompatActivity {
                     screenshotManager.requestScreenshotPermission(MainActivity.this, 1);
                     startServiceCapture();
                     btnStart.setText(getString(R.string.stop));
+                    sharedPreferencesManager.startPressed(true);
                 } else {
                     btnStart.setText(getString(R.string.start));
+                    sharedPreferencesManager.startPressed(false);
 
                     //stop service
                     stopService(new Intent(MainActivity.this, ServiceCapture.class));
