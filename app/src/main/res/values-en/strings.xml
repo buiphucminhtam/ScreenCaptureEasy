@@ -23,4 +23,11 @@
     <string name="theme">Theme</string>
     <string name="vibrate">Vibrate</string>
     <string name="language">Language</string>
+    <string name="countdown">Count Down</string>
+    <string name="light">Light</string>
+    <string name="dark">Dark</string>
+    <string name="black">Black</string>
+    <string name="seconds">Seconds</string>
+    <string name="vietnam">Vietnamese</string>
+    <string name="english">English</string>
 </resources>

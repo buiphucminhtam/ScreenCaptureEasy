@@ -21,8 +21,8 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.minhtam.screencaptureeasy.Activity.ImageViewerActivity;
-import com.minhtam.screencaptureeasy.Const;
 import com.minhtam.screencaptureeasy.Activity.MainActivity;
+import com.minhtam.screencaptureeasy.Const;
 import com.minhtam.screencaptureeasy.R;
 import com.minhtam.screencaptureeasy.Util.ScreenshotManager;
 
@@ -73,13 +73,13 @@ public class ServiceCapture extends Service {
         if (intent.getAction().equals(Const.ACTION_INIT)) {
             initScreenShoot(intent);
         }else
-            if (intent.getAction().equals(Const.ACTION_SCREEN_CAPTURE_NOTIFICATION)) {
-                startCaptureScreen();
-            }
+        if (intent.getAction().equals(Const.ACTION_SCREEN_CAPTURE_NOTIFICATION)) {
+            startCaptureScreen();
+        }
         else
-            if (intent.getAction().equals(Const.ACTION_RUN_MAINACTIVITY)) {
-                startActivity(new Intent(this,MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-            }
+        if (intent.getAction().equals(Const.ACTION_RUN_MAINACTIVITY)) {
+            startActivity(new Intent(this,MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+        }
 
 
 
@@ -188,7 +188,7 @@ public class ServiceCapture extends Service {
             @Override
             public void onFinish() {
                 if (countDownValue > 1000)
-                  mWindowManager.removeView(tvCountDown);
+                    mWindowManager.removeView(tvCountDown);
 
                 new CountDownTimer(300, 1000) {
                     @Override
@@ -390,6 +390,8 @@ public class ServiceCapture extends Service {
         if (overlayIcon != null && overlayIsShowing) {
             mWindowManager.removeView(overlayIcon);
         }
+
+        unregisterReceiver(receiver);
 
     }
 }

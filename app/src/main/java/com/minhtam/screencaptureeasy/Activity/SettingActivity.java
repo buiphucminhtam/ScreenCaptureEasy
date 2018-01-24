@@ -39,7 +39,7 @@ public class SettingActivity extends PreferenceActivity implements SharedPrefere
 
         //check count down to hide, show list cd
         if (prefs.getBoolean(getString(R.string.countdown_key), false)) {
-            listCountDown.setSummary(prefs.getString(getString(R.string.countdownValues_key),getResources().getStringArray(R.array.countdownValues)[0]) + " seconds");
+            listCountDown.setSummary(prefs.getString(getString(R.string.countdownValues_key),getResources().getStringArray(R.array.countdownValues)[0]) + getString(R.string.seconds));
         } else {
             listCountDown.setSummary(getResources().getStringArray(R.array.countdownArray)[0]);
         }

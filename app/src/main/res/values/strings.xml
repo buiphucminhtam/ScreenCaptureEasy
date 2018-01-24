@@ -8,6 +8,12 @@
     <string name="stop">Stop</string>
     <string name="taptoscreenshot">Tap to screen shot</string>
     <string name="running">Running</string>
+    <string name="light">Light</string>
+    <string name="dark">Dark</string>
+    <string name="black">Black</string>
+    <string name="seconds">Seconds</string>
+    <string name="vietnamese">Vietnamese</string>
+    <string name="english">English</string>
 
 
     <string name="save_notification_icon">notification_icon</string>

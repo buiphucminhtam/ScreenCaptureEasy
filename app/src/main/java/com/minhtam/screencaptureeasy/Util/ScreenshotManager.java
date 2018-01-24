@@ -1,5 +1,6 @@
 package com.minhtam.screencaptureeasy.Util;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -25,6 +26,7 @@ import java.nio.ByteBuffer;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by Tam on 10/18/2017.
@@ -71,6 +73,7 @@ public class ScreenshotManager {
         final ImageReader imageReader = ImageReader.newInstance(width, height, PixelFormat.RGBA_8888, 1);
         final VirtualDisplay virtualDisplay = mediaProjection.createVirtualDisplay(SCREENCAP_NAME, width, height, density, VIRTUAL_DISPLAY_FLAGS, imageReader.getSurface(), null, null);
         imageReader.setOnImageAvailableListener(new ImageReader.OnImageAvailableListener() {
+            @SuppressLint("StaticFieldLeak")
             @Override
             public void onImageAvailable(final ImageReader reader) {
                 Log.d("AppLog", "onImageAvailable");
