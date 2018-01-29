@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ScreenCaptureEasy</string>
+    <string name="app_name">ScreenShot Capture</string>
     <string name="camera_button">Nút máy ảnh</string>
     <string name="fileName">Tên ảnh</string>
     <string name="language">Ngôn ngữ</string>
     <string name="notification_icon">Biểu tượng thông báo</string>
     <string name="overlay_icon">Biểu tượng lớp phủ</string>
-    <string name="prefGeneralTittle">Tổng quan</string>
+    <string name="prefGeneralTittle">TỔNG QUAN</string>
     <string name="prefImageFormat">Loại hình</string>
-    <string name="prefLayoutTittle">Bố trí</string>
+    <string name="prefLayoutTittle">BỐ TRÍ</string>
     <string name="prefNotificationTittle">Thông báo</string>
-    <string name="prefStorageTittle">Lưu trữ</string>
-    <string name="prefTimeoutTittle">Đếm ngược</string>
+    <string name="prefStorageTittle">LƯU TRỮ</string>
+    <string name="prefTimeoutTittle">ĐẾM NGƯỢC</string>
     <string name="running">Đang hoạt động</string>
     <string name="saveLocation">Vị trí lưu</string>
     <string name="saveSilentlyTittle">Lưu yên lặng</string>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="ImageItemWidth">168dp</dimen>
-    <dimen name="ImageItemHeight">281dp</dimen>
+    <dimen name="ImageItemWidth">150dp</dimen>
+    <dimen name="ImageItemHeight">240dp</dimen>
     <dimen name="switchHeight">37dp</dimen>
     <dimen name="margin20dp">37dp</dimen>
     <dimen name="margin10dp">18dp</dimen>
@@ -11,4 +11,7 @@
     <dimen name="chatheadHeight">112dp</dimen>
     <dimen name="widthItemImage">262dp</dimen>
     <dimen name="padding2dp">3dp</dimen>
+    <dimen name="padding5dp">9dp</dimen>
+    <dimen name="padding20dp">37dp</dimen>
+    <dimen name="actionBarSize">75dp</dimen>
 </resources>

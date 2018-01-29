@@ -41,7 +41,10 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".Activity.ImageViewerActivity"></activity>
+        <activity android:name=".Activity.ImageViewerActivity"/>
+
+        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat"/>
     </application>
 
 </manifest>

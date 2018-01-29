@@ -42,7 +42,7 @@ public class AdapterImage extends RecyclerView.Adapter<AdapterImage.ViewHolder> 
     @Override
     public void onBindViewHolder(AdapterImage.ViewHolder holder, int position) {
         CardView cardView = (CardView) holder.itemView;
-        cardView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT));
+        cardView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.MATCH_PARENT));
         Picasso.with(context).load(new File(listPathImages.get(position))).into(holder.imvItem);
     }
 

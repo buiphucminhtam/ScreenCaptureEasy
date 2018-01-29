@@ -1,32 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:weightSum="10"
     tools:context="com.minhtam.screencaptureeasy.Activity.ImageViewerActivity">
 
 
     <RelativeLayout
+        android:layout_weight="3"
         android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/heightMainImage">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/imvMain"
             android:layout_gravity="center"
-            android:layout_width="@dimen/widthMainImage"
-            android:layout_height="@dimen/heightMainImage" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </RelativeLayout>
 
 
     <android.support.v7.widget.RecyclerView
+        android:layout_weight="7"
         android:orientation="horizontal"
         android:id="@+id/rvListImages"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
     </android.support.v7.widget.RecyclerView>
 
 

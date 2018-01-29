@@ -5,8 +5,7 @@
     android:layout_height="@dimen/chatheadHeight">
 
     <ImageView
-        android:src="@drawable/ic_camera_enhance_white"
-        android:background="@drawable/circle_chathead"
+        android:src="@drawable/icon_screenshot1"
         android:layout_width="@dimen/chatheadWidth"
         android:layout_height="@dimen/chatheadHeight" />
 

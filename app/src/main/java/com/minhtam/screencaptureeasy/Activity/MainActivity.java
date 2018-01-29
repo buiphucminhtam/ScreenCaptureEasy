@@ -66,13 +66,13 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuItem itemList = menu.add(1, 1, 1, "List Image");
 
-        itemList.setIcon(R.drawable.ic_view_list_white_24dp);
+        itemList.setIcon(R.drawable.ic_photo_16_18px);
         itemList.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
 
         MenuItem item = menu.add(2, 2, 2, "Setting");
 
-        item.setIcon(R.drawable.ic_settings_white_24dp);
+        item.setIcon(R.drawable.ic_config_16px);
         item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
         return super.onCreateOptionsMenu(menu);
@@ -104,8 +104,10 @@ public class MainActivity extends AppCompatActivity {
 
         if (isServiceRunning(ServiceCapture.class)) {
             btnStart.setText(getString(R.string.stop));
+            btnStart.setBackgroundResource(R.drawable.roundedbutton_stop);
         } else {
             btnStart.setText(getString(R.string.start));
+            btnStart.setBackgroundResource(R.drawable.roundedbutton_start);
         }
 //        isStart = sharedPreferencesManager.getIsStart();
 //        if (isStart) {
@@ -125,19 +127,25 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (!isServiceRunning(ServiceCapture.class)) {
-
+                    //save file
                     sharedPreferencesManager.saveSetting(swNotificationIcon.isChecked(),swOverlayIcon.isChecked(),swCameraButton.isChecked(),swShake.isChecked());
 
                     screenshotManager.requestScreenshotPermission(MainActivity.this, 1);
                     startServiceCapture();
                     btnStart.setText(getString(R.string.stop));
                     sharedPreferencesManager.startPressed(true);
+
+                    //Change color
+                    btnStart.setBackgroundResource(R.drawable.roundedbutton_stop);
                 } else {
                     btnStart.setText(getString(R.string.start));
                     sharedPreferencesManager.startPressed(false);
 
                     //stop service
                     stopService(new Intent(MainActivity.this, ServiceCapture.class));
+
+                    //Change color button
+                    btnStart.setBackgroundResource(R.drawable.roundedbutton_start);
                 }
 
 
