@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory android:title="@string/prefGeneralTittle">
+    <PreferenceCategory android:title="@string/prefGeneralTittle" >
         <SwitchPreference android:title="@string/saveSilentlyTittle"
             android:key="@string/savesilently_key"/>
         <SwitchPreference android:title="@string/startOnBoot"
             android:key="@string/startonboot_key"/>
+
+        <ListPreference
+            android:title="@string/countdownvaluetittle"
+            android:key="@string/countdownValues_key"
+            android:defaultValue="Disable"
+            android:entries="@array/countdownArray"
+            android:entryValues="@array/countdownValues"/>
+
+        <Preference android:key="@string/key_ads"></Preference>
+
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/prefLayoutTittle">
@@ -12,24 +22,8 @@
             android:entries="@array/themeArray"
             android:entryValues="@array/themeValues"
             android:key="@string/theme_key"/>
-
-        <ListPreference android:title="@string/language"
-            android:entries="@array/languageArray"
-            android:entryValues="@array/languageValues"
-            android:key="@string/language_key"/>
-
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/prefTimeoutTittle">
-        <ListPreference
-            android:title="@string/countdownvaluetittle"
-            android:key="@string/countdownValues_key"
-            android:defaultValue="0"
-            android:entries="@array/countdownArray"
-            android:entryValues="@array/countdownValues"/>
-        <SwitchPreference android:title="@string/countdown"
-            android:key="@string/countdown_key"/>
-    </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/prefStorageTittle">
         <com.github.angads25.filepicker.view.FilePickerPreference

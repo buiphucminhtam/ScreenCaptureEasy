@@ -62,12 +62,12 @@
     </string-array>
 
     <string-array name="countdownArray">
-        <item>0</item>
-        <item>2</item>
-        <item>5</item>
-        <item>10</item>
-        <item>15</item>
-        <item>20</item>
+        <item>Disable</item>
+        <item>2 Seconds</item>
+        <item>5 Seconds</item>
+        <item>10 Seconds</item>
+        <item>15 Seconds</item>
+        <item>20 Seconds</item>
     </string-array>
 
     <string-array name="countdownValues">
@@ -78,4 +78,5 @@
         <item>15</item>
         <item>20</item>
     </string-array>
+
 </resources>

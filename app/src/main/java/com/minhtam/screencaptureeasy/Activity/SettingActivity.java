@@ -32,19 +32,12 @@ public class SettingActivity extends PreferenceActivity implements SharedPrefere
         ListPreference listThemes = (ListPreference) findPreference(getString(R.string.theme_key));
         ListPreference listFileName = (ListPreference) findPreference(getString(R.string.filename_key));
         FilePickerPreference preference = (FilePickerPreference) findPreference(getString(R.string.savelocation_key));
-        ListPreference listLanguage = (ListPreference) findPreference(getString(R.string.language_key));
+        Preference preferenceAds = findPreference(getString(R.string.key_ads));
 
-        //set default lang
-        listLanguage.setSummary(prefs.getString(getString(R.string.language_key),getResources().getStringArray(R.array.languageValues)[1]));
 
-        //check count down to hide, show list cd
-        if (prefs.getBoolean(getString(R.string.countdown_key), false)) {
-            listCountDown.setSummary(prefs.getString(getString(R.string.countdownValues_key),getResources().getStringArray(R.array.countdownValues)[0]) + getString(R.string.seconds));
-        } else {
-            listCountDown.setSummary(getResources().getStringArray(R.array.countdownArray)[0]);
-        }
-
-        listThemes.setSummary(prefs.getString(getString(R.string.theme_key),getResources().getStringArray(R.array.themeArray)[0]));
+        //Set show default
+        listCountDown.setSummary(prefs.getString(getString(R.string.countdownValues_key), getResources().getStringArray(R.array.countdownValues)[0]));
+        listThemes.setSummary(prefs.getString(getString(R.string.theme_key),getResources().getStringArray(R.array.themeValues)[0]));
 
         String value = prefs.getString(getString(R.string.filename_key),getResources().getStringArray(R.array.filename_values)[0]);
         int position = Integer.parseInt(value);
@@ -81,20 +74,9 @@ public class SettingActivity extends PreferenceActivity implements SharedPrefere
             case R.string.theme:
                 pref.setSummary(prefs.getString(getResources().getString(R.string.theme_key),getResources().getStringArray(R.array.themeArray)[0]));
                 break;
-            case R.string.language:
-                pref.setSummary(prefs.getString(getResources().getString(R.string.language_key),getResources().getStringArray(R.array.languageArray)[0]));
-                break;
             case R.string.countdownvaluetittle:
                 ListPreference listCountDown = (ListPreference) findPreference(getString(R.string.countdownValues_key));
-                listCountDown.setSummary(prefs.getString(getString(R.string.countdownValues_key),getResources().getStringArray(R.array.countdownValues)[0]) + " seconds");
-                break;
-            case R.string.countdown:
-                ListPreference listcd = (ListPreference) findPreference(getString(R.string.countdownValues_key));
-                if (prefs.getBoolean(getString(R.string.countdown_key), false)) {
-                    listcd.setSummary(prefs.getString(getString(R.string.countdownValues_key),getResources().getStringArray(R.array.countdownValues)[0]) + " seconds");
-                } else {
-                    listcd.setSummary(getResources().getStringArray(R.array.countdownArray)[0]);
-                }
+                listCountDown.setSummary(prefs.getString(getString(R.string.countdownValues_key),getResources().getStringArray(R.array.countdownArray)[0]));
                 break;
             case R.string.saveLocation:
                 pref.setSummary(prefs.getString(getString(R.string.savelocation_key),defaultLocation));

@@ -49,7 +49,8 @@
     <string name="countdown_key">countdown</string>
     <string name="countdownValues_key">countdownValues</string>
     <string name="filename_key">filname</string>
-    <string name="countdownvaluetittle"> </string>
+    <string name="countdownvaluetittle">"Time countdown"</string>
     <string name="filetype_key">filetype</string>
     <string name="started_key">started</string>
+    <string name="key_ads">ads</string>
 </resources>
