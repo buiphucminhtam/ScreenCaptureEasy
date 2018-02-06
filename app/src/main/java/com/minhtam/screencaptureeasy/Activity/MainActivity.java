@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.minhtam.screencaptureeasy.Const;
 import com.minhtam.screencaptureeasy.R;
@@ -30,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     private Switch swNotificationIcon, swOverlayIcon, swCameraButton, swShake;
 
     private SharedPreferencesManager sharedPreferencesManager;
+
+    private Toast toast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,17 +130,28 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (!isServiceRunning(ServiceCapture.class)) {
-                    //save file
-                    sharedPreferencesManager.saveSetting(swNotificationIcon.isChecked(),swOverlayIcon.isChecked(),swCameraButton.isChecked(),swShake.isChecked());
 
-                    screenshotManager.requestScreenshotPermission(MainActivity.this, 1);
-                    startServiceCapture();
-                    btnStart.setText(getString(R.string.stop));
-                    sharedPreferencesManager.startPressed(true);
+                    if (checkNothingSelected()) {
+                        //save file
+                        sharedPreferencesManager.saveSetting(swNotificationIcon.isChecked(), swOverlayIcon.isChecked(), swCameraButton.isChecked(), swShake.isChecked());
 
-                    //Change color
-                    btnStart.setBackgroundResource(R.drawable.roundedbutton_stop);
+                        screenshotManager.requestScreenshotPermission(MainActivity.this, 1);
+                        startServiceCapture();
+                        btnStart.setText(getString(R.string.stop));
+                        sharedPreferencesManager.startPressed(true);
+
+                        //Change color
+                        btnStart.setBackgroundResource(R.drawable.roundedbutton_stop);
+                    } else {
+                        if (toast != null) {
+                            toast.cancel();
+                            toast = null;
+                        }
+                        toast = Toast.makeText(MainActivity.this,"Nothing has been selected",Toast.LENGTH_LONG);
+                        toast.show();
+                    }
                 } else {
+                    //true -> have some thing selected; false - > nothing selected
                     btnStart.setText(getString(R.string.start));
                     sharedPreferencesManager.startPressed(false);
 
@@ -148,10 +162,17 @@ public class MainActivity extends AppCompatActivity {
                     btnStart.setBackgroundResource(R.drawable.roundedbutton_start);
                 }
 
-
-
             }
         });
+    }
+
+    private boolean checkNothingSelected(){
+        if(swCameraButton.isChecked()) return true;
+        else if(swNotificationIcon.isChecked()) return true;
+        else if(swOverlayIcon.isChecked()) return true;
+        else if(swShake.isChecked()) return true;
+
+        return false;
     }
 
     private void startServiceCapture() {
