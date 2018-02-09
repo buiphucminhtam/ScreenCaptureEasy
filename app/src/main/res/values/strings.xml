@@ -53,4 +53,10 @@
     <string name="filetype_key">filetype</string>
     <string name="started_key">started</string>
     <string name="key_ads">ads</string>
+    <string name="alertDelete">Are you sure ?</string>
+    <string name="positiveConfirm">Ok</string>
+    <string name="negativeConfirm">Cancel</string>
+    <string name="deleteSuccess">Deleted</string>
+    <string name="deleteFailed">Deleted Failed</string>
+    <string name="saved">Saved</string>
 </resources>

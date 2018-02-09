@@ -31,4 +31,11 @@
     <string name="seconds">Giây</string>
     <string name="vietnam">Tiếng Việt</string>
     <string name="english">Tiếng Anh</string>
+    <string name="saved">Đã lưu ảnh</string>
+    <string name="deleteFailed">Xóa thất bại</string>
+    <string name="deleteSuccess">Xóa thành công</string>
+    <string name="negativeConfirm">Hủy</string>
+    <string name="positiveConfirm">Đồng ý</string>
+    <string name="alertDelete">Bạn có chắc không ?</string>
+    <string name="vietnamese">Tiếng Việt</string>
 </resources>

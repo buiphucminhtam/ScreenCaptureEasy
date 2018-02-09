@@ -10,6 +10,7 @@ import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 import android.util.TypedValue;
@@ -42,8 +43,8 @@ public class ServiceCapture extends Service {
     private ShakeDetector shakeDetector;
 
     private boolean saveSilently = false;
-    private long countDownValue = 1000;
-    private final long delayOverlayIcon = 2000;
+    private long countDownValue = 0;
+    private final long delayOverlayIcon = 200;
     private String fileName = "yyyyMMdd_hhmmss";
     private String filePath = Const.defaultLocationSDCard;
     private String fileType = "PNG";
@@ -190,35 +191,28 @@ public class ServiceCapture extends Service {
                 if (countDownValue > 1000)
                     mWindowManager.removeView(tvCountDown);
 
-                new CountDownTimer(300, 1000) {
-                    @Override
-                    public void onTick(long l) {
-                    }
-
-                    @Override
-                    public void onFinish() {
-                        screenshotManager.takeScreenshot(getApplicationContext(),fileName,filePath,fileType);
-                    }
-                }.start();
+                   new Handler().postDelayed(new Runnable() {
+                       @Override
+                       public void run() {
+                           screenshotManager.takeScreenshot(getApplicationContext(),fileName,filePath,fileType);
+                       }
+                   },200);
 
 
-                new CountDownTimer(delayOverlayIcon, 1000) {
-                    @Override
-                    public void onTick(long l) {
-                    }
+                   new Handler().postDelayed(new Runnable() {
+                       @Override
+                       public void run() {
+                           if (!overlayIsShowing && overlayIcon!=null) {
+                               mWindowManager.addView(overlayIcon,params);
+                               overlayIsShowing = true;
+                           }
+                           if (!saveSilently) {
+                               Intent intentView = new Intent(getApplicationContext(), ImageViewerActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                               startActivity(intentView);
+                           }
+                       }
+                   },delayOverlayIcon);
 
-                    @Override
-                    public void onFinish() {
-                        if (!overlayIsShowing && overlayIcon!=null) {
-                            mWindowManager.addView(overlayIcon,params);
-                            overlayIsShowing = true;
-                        }
-                        if (!saveSilently) {
-                            Intent intentView = new Intent(getApplicationContext(), ImageViewerActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intentView);
-                        }
-                    }
-                }.start();
             }
         }.start();
 

@@ -1,12 +1,15 @@
 package com.minhtam.screencaptureeasy.Adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.minhtam.screencaptureeasy.Interface.OnItemClickListener;
 import com.minhtam.screencaptureeasy.R;
@@ -23,6 +26,7 @@ public class AdapterImage extends RecyclerView.Adapter<AdapterImage.ViewHolder> 
     private List<String> listPathImages;
     private Context context;
     private OnItemClickListener onItemClickListener;
+    private AlertDialog alertDialog;
 
     public AdapterImage(Context context, List<String> listPathImages) {
         super();
@@ -52,11 +56,12 @@ public class AdapterImage extends RecyclerView.Adapter<AdapterImage.ViewHolder> 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private ImageView imvItem;
+        private ImageView imvItem, imvRemoveItem;
 
         public ViewHolder(View itemView) {
             super(itemView);
             imvItem = itemView.findViewById(R.id.imvItemScreenshot);
+            imvRemoveItem = itemView.findViewById(R.id.imvRemoveItem);
 
             imvItem.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -64,6 +69,42 @@ public class AdapterImage extends RecyclerView.Adapter<AdapterImage.ViewHolder> 
                     if(onItemClickListener!=null) onItemClickListener.onItemClick(getAdapterPosition());
                 }
             });
+
+            imvRemoveItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    initAlertDialog(getAdapterPosition());
+                    alertDialog.show();
+                }
+            });
+        }
+
+        private void initAlertDialog(final int position) {
+            alertDialog = new AlertDialog.Builder(context)
+            .setTitle(R.string.alertDelete)
+            .setPositiveButton(R.string.positiveConfirm, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    File file = new File(listPathImages.get(position));
+                    if (file.delete()) {
+                        Toast.makeText(context, context.getString(R.string.deleteSuccess), Toast.LENGTH_SHORT).show();
+                        listPathImages.remove(position);
+                        notifyItemRangeRemoved(position,listPathImages.size());
+                        if (listPathImages.size() == 0) {
+                            notifyDataSetChanged();
+                        }
+                    } else {
+                        Toast.makeText(context, context.getString(R.string.deleteFailed), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            })
+            .setNegativeButton(R.string.negativeConfirm, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                }
+            })
+            .create();
         }
     }
 

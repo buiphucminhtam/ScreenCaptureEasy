@@ -9,6 +9,10 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.widget.Toolbar;
 
 import com.github.angads25.filepicker.view.FilePickerPreference;
 import com.minhtam.screencaptureeasy.R;
@@ -25,6 +29,10 @@ public class SettingActivity extends PreferenceActivity implements SharedPrefere
         super.onCreate(savedInstanceState);
         sharedPreferencesManager = new SharedPreferencesManager(this);
         setTheme();
+
+        //Setting up actionbar
+        settingUpActionBar();
+
 
         addPreferencesFromResource(R.xml.setting);
         prefs = getPreferenceScreen().getSharedPreferences();
@@ -51,6 +59,18 @@ public class SettingActivity extends PreferenceActivity implements SharedPrefere
         preference.setSummary(prefs.getString(getString(R.string.savelocation_key), defaultLocation));
 
     }
+
+    private void settingUpActionBar() {
+        getLayoutInflater().inflate(R.layout.toolbar, (ViewGroup)findViewById(android.R.id.content));
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setActionBar(toolbar);
+
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+
+        int topMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, (int) getResources().getDimension(R.dimen.padding20dp) + 30, getResources().getDisplayMetrics());
+        getListView().setPadding(0, topMargin, 0, 0);
+    }
+
 
     private void setTheme() {
         String[] arrayTheme = getResources().getStringArray(R.array.themeValues);
@@ -102,6 +122,15 @@ public class SettingActivity extends PreferenceActivity implements SharedPrefere
         super.onResume();
         getPreferenceScreen().getSharedPreferences()
                 .registerOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     //Method to check if the service is running

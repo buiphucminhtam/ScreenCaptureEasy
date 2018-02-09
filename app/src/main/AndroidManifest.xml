@@ -18,10 +18,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/LightTheme">
-        <activity android:name=".Activity.MainActivity">
+        <activity android:name=".Activity.MainActivity" android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -31,7 +30,7 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".Activity.SettingActivity" />
+        <activity android:name=".Activity.SettingActivity" android:theme="@style/LightTheme"/>
 
         <receiver
             android:name=".Receiver.StartMyServiceAtBootReceiver"

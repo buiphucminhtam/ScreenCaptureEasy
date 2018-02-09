@@ -81,6 +81,7 @@ public class ImageViewerActivity extends AppCompatActivity {
     }
 
     private void getAllImages() {
+        listPathImage.clear();
         SharedPreferencesManager sharedPreferencesManager = new SharedPreferencesManager(this);
         String directoryPath = sharedPreferencesManager.getSaveLocation();
         // List all the items within the folder.
@@ -95,6 +96,7 @@ public class ImageViewerActivity extends AppCompatActivity {
         Collections.reverse(listPathImage);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapterImage);
+        if(listPathImage.size() > 0)
         imvMain.setImageURI(Uri.fromFile(new File(listPathImage.get(0))));
     }
 
@@ -195,6 +197,16 @@ public class ImageViewerActivity extends AppCompatActivity {
         } catch (Exception ex) {
             Log.e("Something went wrong.", ex.getMessage());
             return "";
+        }
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+
+        if (adapterImage != null) {
+            getAllImages();
+            adapterImage.notifyDataSetChanged();
         }
     }
 }

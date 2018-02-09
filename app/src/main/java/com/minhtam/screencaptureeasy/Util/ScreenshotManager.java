@@ -21,12 +21,13 @@ import android.view.Display;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.minhtam.screencaptureeasy.R;
+
 import java.io.File;
 import java.nio.ByteBuffer;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 /**
  * Created by Tam on 10/18/2017.
@@ -114,7 +115,7 @@ public class ScreenshotManager {
                             Date date = new Date();
                             File file = ImageSaver.getInstance().saveScreenshotToPicturesFolder(context, bitmap, dateFormat.format(date),filePath,fileType);
 
-                            Toast.makeText(context, "Saved " + file.getName() +"", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, context.getString(R.string.saved), Toast.LENGTH_SHORT).show();
                             Log.d("ServiceCapture", "File != null");
                         } catch (Exception e) {
                             e.printStackTrace();
