@@ -1,4 +1,4 @@
-package com.minhtam.screencaptureeasy.Util;
+package ot.screenshot.capture.Util;
 
 import android.content.Context;
 import android.graphics.Bitmap;

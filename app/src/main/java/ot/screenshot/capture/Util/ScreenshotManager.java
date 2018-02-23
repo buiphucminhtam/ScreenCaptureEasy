@@ -1,4 +1,4 @@
-package com.minhtam.screencaptureeasy.Util;
+package ot.screenshot.capture.Util;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -21,7 +21,7 @@ import android.view.Display;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.minhtam.screencaptureeasy.R;
+import ot.screenshot.capture.R;
 
 import java.io.File;
 import java.nio.ByteBuffer;

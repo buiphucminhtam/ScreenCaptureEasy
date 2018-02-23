@@ -1,4 +1,4 @@
-package com.minhtam.screencaptureeasy.Activity;
+package ot.screenshot.capture.Activity;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -11,10 +11,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
-import com.minhtam.screencaptureeasy.Adapter.AdapterImage;
-import com.minhtam.screencaptureeasy.Interface.OnItemClickListener;
-import com.minhtam.screencaptureeasy.R;
-import com.minhtam.screencaptureeasy.Util.SharedPreferencesManager;
+import ot.screenshot.capture.Adapter.AdapterImage;
+import ot.screenshot.capture.Interface.OnItemClickListener;
+import ot.screenshot.capture.Util.SharedPreferencesManager;
 import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.io.File;
@@ -44,13 +43,13 @@ public class ImageViewerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         sharedPreferencesManager = new SharedPreferencesManager(this);
         setTheme();
-        setContentView(R.layout.activity_image_viewer);
+        setContentView(ot.screenshot.capture.R.layout.activity_image_viewer);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        recyclerView = (RecyclerView) findViewById(R.id.rvListImages);
-        imvMain = (ImageView) findViewById(R.id.imvMain);
+        recyclerView = (RecyclerView) findViewById(ot.screenshot.capture.R.id.rvListImages);
+        imvMain = (ImageView) findViewById(ot.screenshot.capture.R.id.imvMain);
         listPathImage = new ArrayList<>();
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         adapterImage = new AdapterImage(this, listPathImage);
@@ -67,15 +66,15 @@ public class ImageViewerActivity extends AppCompatActivity {
     }
 
     private void setTheme() {
-        String[] arrayTheme = getResources().getStringArray(R.array.themeValues);
+        String[] arrayTheme = getResources().getStringArray(ot.screenshot.capture.R.array.themeValues);
 
         if (sharedPreferencesManager.getThemeType().equals(arrayTheme[0])) {
-            setTheme(R.style.LightTheme);
+            setTheme(ot.screenshot.capture.R.style.LightTheme);
         } else if (sharedPreferencesManager.getThemeType().equals(arrayTheme[1])) {
-            setTheme(R.style.DarkTheme);
+            setTheme(ot.screenshot.capture.R.style.DarkTheme);
         } else {
             if (sharedPreferencesManager.getThemeType().equals(arrayTheme[2])) {
-                setTheme(R.style.BlackTheme);
+                setTheme(ot.screenshot.capture.R.style.BlackTheme);
             }
         }
     }
@@ -127,7 +126,7 @@ public class ImageViewerActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuItem item = menu.add(1,1,1,"CropImage");
         item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-        item.setIcon(R.drawable.ic_crop_20px);
+        item.setIcon(ot.screenshot.capture.R.drawable.ic_crop_20px);
 
         return super.onCreateOptionsMenu(menu);
     }

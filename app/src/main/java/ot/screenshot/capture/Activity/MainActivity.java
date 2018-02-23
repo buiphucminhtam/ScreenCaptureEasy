@@ -1,4 +1,4 @@
-package com.minhtam.screencaptureeasy.Activity;
+package ot.screenshot.capture.Activity;
 
 import android.Manifest;
 import android.app.ActivityManager;
@@ -16,11 +16,10 @@ import android.widget.Button;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import com.minhtam.screencaptureeasy.Const;
-import com.minhtam.screencaptureeasy.R;
-import com.minhtam.screencaptureeasy.Service.ServiceCapture;
-import com.minhtam.screencaptureeasy.Util.ScreenshotManager;
-import com.minhtam.screencaptureeasy.Util.SharedPreferencesManager;
+import ot.screenshot.capture.Const;
+import ot.screenshot.capture.Service.ServiceCapture;
+import ot.screenshot.capture.Util.ScreenshotManager;
+import ot.screenshot.capture.Util.SharedPreferencesManager;
 
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_WRITE_PERMISSION = 786;
@@ -39,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         sharedPreferencesManager = new SharedPreferencesManager(this);
         setTheme();
-        setContentView(R.layout.activity_main);
+        setContentView(ot.screenshot.capture.R.layout.activity_main);
         //check permission for require
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!checkPermission()) {
@@ -52,15 +51,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setTheme() {
-        String[] arrayTheme = getResources().getStringArray(R.array.themeValues);
+        String[] arrayTheme = getResources().getStringArray(ot.screenshot.capture.R.array.themeValues);
 
         if (sharedPreferencesManager.getThemeType().equals(arrayTheme[0])) {
-            setTheme(R.style.LightTheme);
+            setTheme(ot.screenshot.capture.R.style.LightTheme);
         } else if (sharedPreferencesManager.getThemeType().equals(arrayTheme[1])) {
-            setTheme(R.style.DarkTheme);
+            setTheme(ot.screenshot.capture.R.style.DarkTheme);
         } else {
             if (sharedPreferencesManager.getThemeType().equals(arrayTheme[2])) {
-                setTheme(R.style.BlackTheme);
+                setTheme(ot.screenshot.capture.R.style.BlackTheme);
             }
         }
     }
@@ -69,13 +68,13 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuItem itemList = menu.add(1, 1, 1, "List Image");
 
-        itemList.setIcon(R.drawable.ic_photo_16_18px);
+        itemList.setIcon(ot.screenshot.capture.R.drawable.ic_photo_16_18px);
         itemList.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
 
         MenuItem item = menu.add(2, 2, 2, "Setting");
 
-        item.setIcon(R.drawable.ic_config_16px);
+        item.setIcon(ot.screenshot.capture.R.drawable.ic_config_16px);
         item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
         return super.onCreateOptionsMenu(menu);
@@ -94,11 +93,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void AddControl() {
-        btnStart = (Button) findViewById(R.id.btnStart);
-        swNotificationIcon = (Switch) findViewById(R.id.swnotificationicon);
-        swOverlayIcon = (Switch) findViewById(R.id.swoverlayicon);
-        swCameraButton = (Switch) findViewById(R.id.swcamerabutton);
-        swShake = (Switch) findViewById(R.id.swshake);
+        btnStart = (Button) findViewById(ot.screenshot.capture.R.id.btnStart);
+        swNotificationIcon = (Switch) findViewById(ot.screenshot.capture.R.id.swnotificationicon);
+        swOverlayIcon = (Switch) findViewById(ot.screenshot.capture.R.id.swoverlayicon);
+        swCameraButton = (Switch) findViewById(ot.screenshot.capture.R.id.swcamerabutton);
+        swShake = (Switch) findViewById(ot.screenshot.capture.R.id.swshake);
 
         swNotificationIcon.setChecked(sharedPreferencesManager.getNotificationMode());
         swOverlayIcon.setChecked(sharedPreferencesManager.getOverlayIconMode());
@@ -106,11 +105,11 @@ public class MainActivity extends AppCompatActivity {
         swShake.setChecked(sharedPreferencesManager.getShakeMode());
 
         if (isServiceRunning(ServiceCapture.class)) {
-            btnStart.setText(getString(R.string.stop));
-            btnStart.setBackgroundResource(R.drawable.roundedbutton_stop);
+            btnStart.setText(getString(ot.screenshot.capture.R.string.stop));
+            btnStart.setBackgroundResource(ot.screenshot.capture.R.drawable.roundedbutton_stop);
         } else {
-            btnStart.setText(getString(R.string.start));
-            btnStart.setBackgroundResource(R.drawable.roundedbutton_start);
+            btnStart.setText(getString(ot.screenshot.capture.R.string.start));
+            btnStart.setBackgroundResource(ot.screenshot.capture.R.drawable.roundedbutton_start);
         }
 //        isStart = sharedPreferencesManager.getIsStart();
 //        if (isStart) {
@@ -137,11 +136,11 @@ public class MainActivity extends AppCompatActivity {
 
                         screenshotManager.requestScreenshotPermission(MainActivity.this, 1);
                         startServiceCapture();
-                        btnStart.setText(getString(R.string.stop));
+                        btnStart.setText(getString(ot.screenshot.capture.R.string.stop));
                         sharedPreferencesManager.startPressed(true);
 
                         //Change color
-                        btnStart.setBackgroundResource(R.drawable.roundedbutton_stop);
+                        btnStart.setBackgroundResource(ot.screenshot.capture.R.drawable.roundedbutton_stop);
                     } else {
                         if (toast != null) {
                             toast.cancel();
@@ -152,14 +151,14 @@ public class MainActivity extends AppCompatActivity {
                     }
                 } else {
                     //true -> have some thing selected; false - > nothing selected
-                    btnStart.setText(getString(R.string.start));
+                    btnStart.setText(getString(ot.screenshot.capture.R.string.start));
                     sharedPreferencesManager.startPressed(false);
 
                     //stop service
                     stopService(new Intent(MainActivity.this, ServiceCapture.class));
 
                     //Change color button
-                    btnStart.setBackgroundResource(R.drawable.roundedbutton_start);
+                    btnStart.setBackgroundResource(ot.screenshot.capture.R.drawable.roundedbutton_start);
                 }
 
             }
@@ -177,16 +176,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void startServiceCapture() {
         Intent i = new Intent(MainActivity.this, ServiceCapture.class);
-        i.putExtra(getString(R.string.save_notification_icon), swNotificationIcon.isChecked());
-        i.putExtra(getString(R.string.save_overlay_icon), swOverlayIcon.isChecked());
-        i.putExtra(getString(R.string.save_camera_button), swCameraButton.isChecked());
-        i.putExtra(getString(R.string.save_shake), swShake.isChecked());
-        i.putExtra(getString(R.string.savesilently_key), sharedPreferencesManager.getSaveSilently());
-        i.putExtra(getString(R.string.countdownValues_key), sharedPreferencesManager.getCountDown());
-        i.putExtra(getString(R.string.filename_key), sharedPreferencesManager.getFileName());
+        i.putExtra(getString(ot.screenshot.capture.R.string.save_notification_icon), swNotificationIcon.isChecked());
+        i.putExtra(getString(ot.screenshot.capture.R.string.save_overlay_icon), swOverlayIcon.isChecked());
+        i.putExtra(getString(ot.screenshot.capture.R.string.save_camera_button), swCameraButton.isChecked());
+        i.putExtra(getString(ot.screenshot.capture.R.string.save_shake), swShake.isChecked());
+        i.putExtra(getString(ot.screenshot.capture.R.string.savesilently_key), sharedPreferencesManager.getSaveSilently());
+        i.putExtra(getString(ot.screenshot.capture.R.string.countdownValues_key), sharedPreferencesManager.getCountDown());
+        i.putExtra(getString(ot.screenshot.capture.R.string.filename_key), sharedPreferencesManager.getFileName());
         //check location internal or external
-        i.putExtra(getString(R.string.savelocation_key), sharedPreferencesManager.getSaveLocation());
-        i.putExtra(getString(R.string.filetype_key), "PNG");
+        i.putExtra(getString(ot.screenshot.capture.R.string.savelocation_key), sharedPreferencesManager.getSaveLocation());
+        i.putExtra(getString(ot.screenshot.capture.R.string.filetype_key), "PNG");
 
         //set action
         i.setAction(Const.ACTION_INIT);

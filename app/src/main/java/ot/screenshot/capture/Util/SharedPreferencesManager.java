@@ -1,11 +1,11 @@
-package com.minhtam.screencaptureeasy.Util;
+package ot.screenshot.capture.Util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.minhtam.screencaptureeasy.Const;
-import com.minhtam.screencaptureeasy.R;
+import ot.screenshot.capture.Const;
+import ot.screenshot.capture.R;
 
 /**
  * Created by Tam on 10/19/2017.

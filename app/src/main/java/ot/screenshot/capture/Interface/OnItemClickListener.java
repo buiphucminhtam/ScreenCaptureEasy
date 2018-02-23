@@ -1,4 +1,4 @@
-package com.minhtam.screencaptureeasy.Interface;
+package ot.screenshot.capture.Interface;
 
 /**
  * Created by Tam on 11/8/2017.

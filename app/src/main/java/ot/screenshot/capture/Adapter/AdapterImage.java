@@ -1,4 +1,4 @@
-package com.minhtam.screencaptureeasy.Adapter;
+package ot.screenshot.capture.Adapter;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.minhtam.screencaptureeasy.Interface.OnItemClickListener;
-import com.minhtam.screencaptureeasy.R;
+import ot.screenshot.capture.Interface.OnItemClickListener;
+import ot.screenshot.capture.R;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;

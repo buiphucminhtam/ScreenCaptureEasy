@@ -1,12 +1,8 @@
-package com.minhtam.screencaptureeasy;
+package ot.screenshot.capture;
 
-import android.content.Context;
-import android.content.ContextWrapper;
 import android.os.Environment;
 
 import java.io.File;
-
-import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by Tam on 11/7/2017.

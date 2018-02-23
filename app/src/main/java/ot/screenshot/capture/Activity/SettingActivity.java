@@ -1,4 +1,4 @@
-package com.minhtam.screencaptureeasy.Activity;
+package ot.screenshot.capture.Activity;
 
 import android.app.ActivityManager;
 import android.content.Context;
@@ -15,8 +15,8 @@ import android.view.ViewGroup;
 import android.widget.Toolbar;
 
 import com.github.angads25.filepicker.view.FilePickerPreference;
-import com.minhtam.screencaptureeasy.R;
-import com.minhtam.screencaptureeasy.Util.SharedPreferencesManager;
+
+import ot.screenshot.capture.Util.SharedPreferencesManager;
 
 public class SettingActivity extends PreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
@@ -34,54 +34,54 @@ public class SettingActivity extends PreferenceActivity implements SharedPrefere
         settingUpActionBar();
 
 
-        addPreferencesFromResource(R.xml.setting);
+        addPreferencesFromResource(ot.screenshot.capture.R.xml.setting);
         prefs = getPreferenceScreen().getSharedPreferences();
-        ListPreference listCountDown = (ListPreference) findPreference(getString(R.string.countdownValues_key));
-        ListPreference listThemes = (ListPreference) findPreference(getString(R.string.theme_key));
-        ListPreference listFileName = (ListPreference) findPreference(getString(R.string.filename_key));
-        FilePickerPreference preference = (FilePickerPreference) findPreference(getString(R.string.savelocation_key));
-        Preference preferenceAds = findPreference(getString(R.string.key_ads));
+        ListPreference listCountDown = (ListPreference) findPreference(getString(ot.screenshot.capture.R.string.countdownValues_key));
+        ListPreference listThemes = (ListPreference) findPreference(getString(ot.screenshot.capture.R.string.theme_key));
+        ListPreference listFileName = (ListPreference) findPreference(getString(ot.screenshot.capture.R.string.filename_key));
+        FilePickerPreference preference = (FilePickerPreference) findPreference(getString(ot.screenshot.capture.R.string.savelocation_key));
+        Preference preferenceAds = findPreference(getString(ot.screenshot.capture.R.string.key_ads));
 
 
         //Set show default
-        listCountDown.setSummary(prefs.getString(getString(R.string.countdownValues_key), getResources().getStringArray(R.array.countdownValues)[0]));
-        listThemes.setSummary(prefs.getString(getString(R.string.theme_key),getResources().getStringArray(R.array.themeValues)[0]));
+        listCountDown.setSummary(prefs.getString(getString(ot.screenshot.capture.R.string.countdownValues_key), getResources().getStringArray(ot.screenshot.capture.R.array.countdownValues)[0]));
+        listThemes.setSummary(prefs.getString(getString(ot.screenshot.capture.R.string.theme_key),getResources().getStringArray(ot.screenshot.capture.R.array.themeValues)[0]));
 
-        String value = prefs.getString(getString(R.string.filename_key),getResources().getStringArray(R.array.filename_values)[0]);
+        String value = prefs.getString(getString(ot.screenshot.capture.R.string.filename_key),getResources().getStringArray(ot.screenshot.capture.R.array.filename_values)[0]);
         int position = Integer.parseInt(value);
         Log.d("Test", position + "");
-        listFileName.setSummary(getResources().getStringArray(R.array.filename)[position]);
+        listFileName.setSummary(getResources().getStringArray(ot.screenshot.capture.R.array.filename)[position]);
 
         //check location
         defaultLocation = new SharedPreferencesManager(this).getSaveLocation();
 
         //set default for file location
-        preference.setSummary(prefs.getString(getString(R.string.savelocation_key), defaultLocation));
+        preference.setSummary(prefs.getString(getString(ot.screenshot.capture.R.string.savelocation_key), defaultLocation));
 
     }
 
     private void settingUpActionBar() {
-        getLayoutInflater().inflate(R.layout.toolbar, (ViewGroup)findViewById(android.R.id.content));
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        getLayoutInflater().inflate(ot.screenshot.capture.R.layout.toolbar, (ViewGroup)findViewById(android.R.id.content));
+        Toolbar toolbar = (Toolbar)findViewById(ot.screenshot.capture.R.id.toolbar);
         setActionBar(toolbar);
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
-        int topMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, (int) getResources().getDimension(R.dimen.padding20dp) + 30, getResources().getDisplayMetrics());
+        int topMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, (int) getResources().getDimension(ot.screenshot.capture.R.dimen.padding20dp) + 30, getResources().getDisplayMetrics());
         getListView().setPadding(0, topMargin, 0, 0);
     }
 
 
     private void setTheme() {
-        String[] arrayTheme = getResources().getStringArray(R.array.themeValues);
+        String[] arrayTheme = getResources().getStringArray(ot.screenshot.capture.R.array.themeValues);
 
         if (sharedPreferencesManager.getThemeType().equals(arrayTheme[0])) {
-            setTheme(R.style.LightTheme);
+            setTheme(ot.screenshot.capture.R.style.LightTheme);
         } else if (sharedPreferencesManager.getThemeType().equals(arrayTheme[1])) {
-            setTheme(R.style.DarkTheme);
+            setTheme(ot.screenshot.capture.R.style.DarkTheme);
         } else {
             if (sharedPreferencesManager.getThemeType().equals(arrayTheme[2])) {
-                setTheme(R.style.BlackTheme);
+                setTheme(ot.screenshot.capture.R.style.BlackTheme);
             }
         }
     }
@@ -91,20 +91,20 @@ public class SettingActivity extends PreferenceActivity implements SharedPrefere
         Preference pref = findPreference(s);
         if (pref == null) return;
         switch (pref.getTitleRes()) {
-            case R.string.theme:
-                pref.setSummary(prefs.getString(getResources().getString(R.string.theme_key),getResources().getStringArray(R.array.themeArray)[0]));
+            case ot.screenshot.capture.R.string.theme:
+                pref.setSummary(prefs.getString(getResources().getString(ot.screenshot.capture.R.string.theme_key),getResources().getStringArray(ot.screenshot.capture.R.array.themeArray)[0]));
                 break;
-            case R.string.countdownvaluetittle:
-                ListPreference listCountDown = (ListPreference) findPreference(getString(R.string.countdownValues_key));
-                listCountDown.setSummary(prefs.getString(getString(R.string.countdownValues_key),getResources().getStringArray(R.array.countdownArray)[0]));
+            case ot.screenshot.capture.R.string.countdownvaluetittle:
+                ListPreference listCountDown = (ListPreference) findPreference(getString(ot.screenshot.capture.R.string.countdownValues_key));
+                listCountDown.setSummary(prefs.getString(getString(ot.screenshot.capture.R.string.countdownValues_key),getResources().getStringArray(ot.screenshot.capture.R.array.countdownArray)[0]));
                 break;
-            case R.string.saveLocation:
-                pref.setSummary(prefs.getString(getString(R.string.savelocation_key),defaultLocation));
+            case ot.screenshot.capture.R.string.saveLocation:
+                pref.setSummary(prefs.getString(getString(ot.screenshot.capture.R.string.savelocation_key),defaultLocation));
                 break;
-            case R.string.fileName:
-                String value = prefs.getString(getString(R.string.filename_key),getResources().getStringArray(R.array.filename_values)[0]);
+            case ot.screenshot.capture.R.string.fileName:
+                String value = prefs.getString(getString(ot.screenshot.capture.R.string.filename_key),getResources().getStringArray(ot.screenshot.capture.R.array.filename_values)[0]);
                 int position = Integer.parseInt(value);
-                pref.setSummary(getResources().getStringArray(R.array.filename)[position]);
+                pref.setSummary(getResources().getStringArray(ot.screenshot.capture.R.array.filename)[position]);
                 break;
         }
 

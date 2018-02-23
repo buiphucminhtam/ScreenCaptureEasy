@@ -1,4 +1,4 @@
-package com.minhtam.screencaptureeasy.Service;
+package ot.screenshot.capture.Service;
 
 import android.app.Notification;
 import android.app.PendingIntent;
@@ -21,11 +21,11 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.minhtam.screencaptureeasy.Activity.ImageViewerActivity;
-import com.minhtam.screencaptureeasy.Activity.MainActivity;
-import com.minhtam.screencaptureeasy.Const;
-import com.minhtam.screencaptureeasy.R;
-import com.minhtam.screencaptureeasy.Util.ScreenshotManager;
+import ot.screenshot.capture.Activity.ImageViewerActivity;
+import ot.screenshot.capture.Activity.MainActivity;
+import ot.screenshot.capture.Const;
+import ot.screenshot.capture.R;
+import ot.screenshot.capture.Util.ScreenshotManager;
 
 import safety.com.br.android_shake_detector.core.ShakeCallback;
 import safety.com.br.android_shake_detector.core.ShakeDetector;
