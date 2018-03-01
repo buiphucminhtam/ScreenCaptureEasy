@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "303863781843",
+    "firebase_url": "https://go-screenshot-capture.firebaseio.com",
+    "project_id": "go-screenshot-capture",
+    "storage_bucket": "go-screenshot-capture.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:303863781843:android:6bcc27d000d59ebd",
+        "android_client_info": {
+          "package_name": "ot.screenshot.capture"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "303863781843-gboblf85obi9h1fs7u4um7fmg2qe8m86.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAA9-eflLdL2mgi_FHrGkWx-8_VdFuO6C0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

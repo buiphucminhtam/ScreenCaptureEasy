@@ -3,156 +3,403 @@
 
     <item
         is-multidex="false"
-        jar="C:\Users\Tam\.android\build-cache\ba3df9fd4a3fb6dfdac3f5339735796b91502b76\output\jars\classes.jar"
+        jar="C:\Users\GreatSky073\.gradle\caches\transforms-1\files-1.1\play-services-tasks-10.2.1.aar\2245cfc873dddfb98e5626a78125882e\jars\classes.jar"
         jumboMode="false"
+        min-sdk-version="21"
         optimize="true"
-        revision="26.0.1"
-        sha1="952944218ecedea1554a513dec0c14d570642843">
-        <dex dex="D:\SVN\ScreenCaptureEasyGit\ScreenCaptureEasy\app\build\intermediates\pre-dexed\debug\classes_fd86005d7c5faec23e75016679f0db2b04767bbe.jar" />
+        revision="26.0.2"
+        sha1="6003d64df88a6ce5e961fa2bad7f1b9b97689ac1">
+        <dex dex="C:\Users\GreatSky073\Desktop\android\ScreenCaptureEasy\app\build\intermediates\transforms\preDex\release\22.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="D:\SDK\SDK\sdk\extras\m2repository\com\android\support\constraint\constraint-layout-solver\1.0.2\constraint-layout-solver-1.0.2.jar"
+        jar="C:\Users\GreatSky073\.gradle\caches\transforms-1\files-1.1\exifinterface-27.1.0.aar\d04d01ea3d1b24b7f9092705eb2956dd\jars\classes.jar"
         jumboMode="false"
+        min-sdk-version="21"
         optimize="true"
-        revision="26.0.1"
-        sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
-        <dex dex="D:\SVN\ScreenCaptureEasyGit\ScreenCaptureEasy\app\build\intermediates\pre-dexed\debug\constraint-layout-solver-1.0.2_fe73e37dd7a7962389d13e19b6f50b349b18a222.jar" />
+        revision="26.0.2"
+        sha1="0d6df4057d1620a785f5bd2e69dd0d7866f3613c">
+        <dex dex="C:\Users\GreatSky073\Desktop\android\ScreenCaptureEasy\app\build\intermediates\transforms\preDex\release\11.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Tam\.android\build-cache\a67b64618db8ab58ed70d8a7162c37044f83bec0\output\jars\classes.jar"
+        jar="C:\Users\GreatSky073\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.0.aar\ad26075c97a0bd86d2c44ac1b8bd2ca6\jars\classes.jar"
         jumboMode="false"
+        min-sdk-version="21"
         optimize="true"
-        revision="26.0.1"
-        sha1="fcd01fd11233459f546c437ec927e9b61bf7caf1">
-        <dex dex="D:\SVN\ScreenCaptureEasyGit\ScreenCaptureEasy\app\build\intermediates\pre-dexed\debug\classes_d1e17876b4494a7b045ab02f1cc64121b867f53c.jar" />
+        revision="26.0.2"
+        sha1="8a9fd7c97f1d13f97f3b52f9d2e54cd857d5acf9">
+        <dex dex="C:\Users\GreatSky073\Desktop\android\ScreenCaptureEasy\app\build\intermediates\transforms\preDex\release\36.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Tam\.android\build-cache\6a8268a723965717061f4bf0c7f9546ebcc45710\output\jars\classes.jar"
+        jar="C:\Users\GreatSky073\.gradle\caches\transforms-1\files-1.1\support-fragment-27.1.0.aar\1d24a5724a4eb1db71a010c4e39d3727\jars\classes.jar"
         jumboMode="false"
+        min-sdk-version="21"
         optimize="true"
-        revision="26.0.1"
-        sha1="47471eb19df288158b00b8d9cfa41bce7373f5cc">
-        <dex dex="D:\SVN\ScreenCaptureEasyGit\ScreenCaptureEasy\app\build\intermediates\pre-dexed\debug\classes_65b31e141f86df6bc29e0fb1eebda64c47f8ccb4.jar" />
+        revision="26.0.2"
+        sha1="fe6c8fbfeeb1454c3eb605c9b66662991681fd55">
+        <dex dex="C:\Users\GreatSky073\Desktop\android\ScreenCaptureEasy\app\build\intermediates\transforms\preDex\release\28.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Tam\.android\build-cache\fedecd96a12816b4f0b895b61c1f3be0d65dbc0e\output\jars\classes.jar"
+        jar="C:\Users\GreatSky073\.gradle\caches\transforms-1\files-1.1\play-services-base-10.2.1.aar\8066c9a3beb4ade9fb25616fa9500a7c\jars\classes.jar"
         jumboMode="false"
+        min-sdk-version="21"
         optimize="true"
-        revision="26.0.1"
-        sha1="18d31838aa4fcc768a8a0516e22cc13b94655d89">
-        <dex dex="D:\SVN\ScreenCaptureEasyGit\ScreenCaptureEasy\app\build\intermediates\pre-dexed\debug\classes_05b7396119d833598cc1c881ced9e9766cf99db4.jar" />
+        revision="26.0.2"
+        sha1="19696dc358ac668e341f28c41e3387d61ccdb81d">
+        <dex dex="C:\Users\GreatSky073\Desktop\android\ScreenCaptureEasy\app\build\intermediates\transforms\preDex\release\17.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Tam\.android\build-cache\3f2cb7d6ebaa7d52bb641fbc48c907d658ba958d\output\jars\classes.jar"
+        jar="C:\Users\GreatSky073\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\4dec91958da33692d11fdcee0431a95b\jars\classes.jar"
         jumboMode="false"
+        min-sdk-version="21"
         optimize="true"
-        revision="26.0.1"
-        sha1="2e92aa0163544a804a0b34f169ca61801770839a">
-        <dex dex="D:\SVN\ScreenCaptureEasyGit\ScreenCaptureEasy\app\build\intermediates\pre-dexed\debug\classes_79d3e236ce592b6e43e77407d1e8b352d09d2389.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Tam\.android\build-cache\d078ab61bcbaa3bd2cdd5372a5d9dc2448d27be9\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.1"
-        sha1="c7fd152c455d73dd61eed2e0c11416d004e3b203">
-        <dex dex="D:\SVN\ScreenCaptureEasyGit\ScreenCaptureEasy\app\build\intermediates\pre-dexed\debug\classes_b62065460f61587a4dac448046c4242d31504180.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Tam\.android\build-cache\fdff7375c9609d35dbc072f55d95b04bf1ea301e\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.1"
-        sha1="88246166d5afb106f532f6e6deae683c66b42c89">
-        <dex dex="D:\SVN\ScreenCaptureEasyGit\ScreenCaptureEasy\app\build\intermediates\pre-dexed\debug\classes_714ab7e5211844877252b9fafc6d9c9ce4589d16.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Tam\.android\build-cache\019f47eb963784435286382449c371a12fddf90a\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.1"
-        sha1="41608af0f80d5829a7a0a7ba4bd47f5c213dd113">
-        <dex dex="D:\SVN\ScreenCaptureEasyGit\ScreenCaptureEasy\app\build\intermediates\pre-dexed\debug\classes_84ffedbb9ecab259e7cb1e97b01f4ca578fbbb65.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Tam\.android\build-cache\a41747250500edbdd70f7246a191d6ba1bb27bee\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.1"
-        sha1="670142f429f3fc489485964d91f3469c78acc9cb">
-        <dex dex="D:\SVN\ScreenCaptureEasyGit\ScreenCaptureEasy\app\build\intermediates\pre-dexed\debug\classes_4d844c9996b2e2a81878cb5bb6533dc9ecd801f1.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Tam\.android\build-cache\561ffbd3feb37fa52f71b903726ff7b65edd5f23\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.1"
-        sha1="9935891f23923f39d002087085d9696568a9f657">
-        <dex dex="D:\SVN\ScreenCaptureEasyGit\ScreenCaptureEasy\app\build\intermediates\pre-dexed\debug\classes_fff7bcde61c667767b72dc4b742b54c41f2928bc.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Tam\.android\build-cache\58ebf5205aef8082bde9d86e2632c4078567f225\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.1"
-        sha1="c4f45092eee6cdf1a5dbd597b2b6819be652ce2e">
-        <dex dex="D:\SVN\ScreenCaptureEasyGit\ScreenCaptureEasy\app\build\intermediates\pre-dexed\debug\classes_8facb5df9fb751163f25e83fdd7c4620a0c5ca21.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="D:\SDK\SDK\sdk\extras\android\m2repository\com\android\support\support-annotations\26.0.0-alpha1\support-annotations-26.0.0-alpha1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.1"
-        sha1="023ee503b631f69511e335a061ea008f8da60f40">
-        <dex dex="D:\SVN\ScreenCaptureEasyGit\ScreenCaptureEasy\app\build\intermediates\pre-dexed\debug\support-annotations-26.0.0-alpha1_e9679de0db88c432f13878398b91c58a90594dab.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Tam\.android\build-cache\35e2c097ed7f7be538176a953140bf20743f515b\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.1"
-        sha1="8df0e365e40beb151bc42dee20817721a6cab7b0">
-        <dex dex="D:\SVN\ScreenCaptureEasyGit\ScreenCaptureEasy\app\build\intermediates\pre-dexed\debug\classes_a3decc148c77a99a9824297b1245686f7f66ab88.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Tam\.android\build-cache\a237157a232f934d8a4b27d71f90de293bdc6005\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.1"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="D:\SVN\ScreenCaptureEasyGit\ScreenCaptureEasy\app\build\intermediates\pre-dexed\debug\classes_e19dd8f98fb273d47e99187aaeba2bdc7e853e80.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Tam\.android\build-cache\9a06e21cde56ab787ff2b633b36f75eb5f664d6b\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.1"
-        sha1="e176fd06c2ad5b50a2f5cb4de6000a83a7cb48f5">
-        <dex dex="D:\SVN\ScreenCaptureEasyGit\ScreenCaptureEasy\app\build\intermediates\pre-dexed\debug\classes_f335fafad13088596b2b4f8e2d4348749f3446de.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Tam\.android\build-cache\3a9db0e2751411902f87d8ab3455af521ef713f5\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.1"
+        revision="26.0.2"
         sha1="44ee06abb66da30f5855e6bf54574e64cdcd982a">
-        <dex dex="D:\SVN\ScreenCaptureEasyGit\ScreenCaptureEasy\app\build\intermediates\pre-dexed\debug\classes_53c09d2611b725accb28595b2def09fad3ee8e2e.jar" />
+        <dex dex="C:\Users\GreatSky073\Desktop\android\ScreenCaptureEasy\app\build\intermediates\transforms\preDex\release\4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\GreatSky073\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.1.0.aar\048473da7eab7df6ee01175fb2881a90\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="6f209b73a488f358673f39317df394bd7a99c05e">
+        <dex dex="C:\Users\GreatSky073\Desktop\android\ScreenCaptureEasy\app\build\intermediates\transforms\preDex\release\29.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\GreatSky073\.gradle\caches\modules-2\files-2.1\android.arch.lifecycle\common\1.1.0\edf3f7bfb84a7521d0599efa3b0113a0ee90f85\common-1.1.0.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="0edf3f7bfb84a7521d0599efa3b0113a0ee90f85">
+        <dex dex="C:\Users\GreatSky073\Desktop\android\ScreenCaptureEasy\app\build\intermediates\transforms\preDex\release\39.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\GreatSky073\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.1.0.aar\8e11a7ce2f0795ff6813de82c7639db1\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="705378853cb9f264315d7a0a8edb6743d72efe9b">
+        <dex dex="C:\Users\GreatSky073\Desktop\android\ScreenCaptureEasy\app\build\intermediates\transforms\preDex\release\26.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\GreatSky073\.gradle\caches\transforms-1\files-1.1\cardview-v7-26.0.0-alpha1.aar\65873a4aa43a050830b7d0d07ea4af51\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="e176fd06c2ad5b50a2f5cb4de6000a83a7cb48f5">
+        <dex dex="C:\Users\GreatSky073\Desktop\android\ScreenCaptureEasy\app\build\intermediates\transforms\preDex\release\7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\GreatSky073\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\7293e3eafdcabbb735e73044258c2bcf\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\GreatSky073\Desktop\android\ScreenCaptureEasy\app\build\intermediates\transforms\preDex\release\24.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\GreatSky073\.gradle\caches\transforms-1\files-1.1\android-shake-detector-v1.2.aar\f6218bf58d854c9f1db98fed9cd6ff04\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="670142f429f3fc489485964d91f3469c78acc9cb">
+        <dex dex="C:\Users\GreatSky073\Desktop\android\ScreenCaptureEasy\app\build\intermediates\transforms\preDex\release\1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\GreatSky073\.gradle\caches\transforms-1\files-1.1\firebase-common-10.2.1.aar\106377a1aba3562416d2f0f88975f87a\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="a1aa1dd9917e887bfe732cc5e561ae6ae8f9a84a">
+        <dex dex="C:\Users\GreatSky073\Desktop\android\ScreenCaptureEasy\app\build\intermediates\transforms\preDex\release\21.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\GreatSky073\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\1fdf77514944c3a69139ed18f6ed6d12\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="71d380aeac037e63bab7bda2ba211777e16a2f42">
+        <dex dex="C:\Users\GreatSky073\Desktop\android\ScreenCaptureEasy\app\build\intermediates\transforms\preDex\release\40.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\GreatSky073\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.0.aar\c5c07d227d610e73c1de3bed0d036ac9\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="1fd3ceac7f415975323d52c6c6057db409a907f6">
+        <dex dex="C:\Users\GreatSky073\Desktop\android\ScreenCaptureEasy\app\build\intermediates\transforms\preDex\release\37.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\GreatSky073\.gradle\caches\transforms-1\files-1.1\play-services-basement-10.2.1.aar\2293a07bc7ea5a1a044bae4b0110f7fb\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="bdcc2a9572f18b8c90a3a157cab6cdfc97c6c736">
+        <dex dex="C:\Users\GreatSky073\Desktop\android\ScreenCaptureEasy\app\build\intermediates\transforms\preDex\release\23.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\GreatSky073\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.0.aar\4e5540ae6c46c5d6528b268a223d7e4b\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="5c66801c7ac6def4ffef7859925b12ce7940438e">
+        <dex dex="C:\Users\GreatSky073\Desktop\android\ScreenCaptureEasy\app\build\intermediates\transforms\preDex\release\3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\GreatSky073\.gradle\caches\transforms-1\files-1.1\play-services-clearcut-10.2.1.aar\7f49c87b2e82468fc6e2c009a56f70a3\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="3683531139103cc263b71d8b5ac6062832a8fd30">
+        <dex dex="C:\Users\GreatSky073\Desktop\android\ScreenCaptureEasy\app\build\intermediates\transforms\preDex\release\16.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\GreatSky073\.gradle\caches\modules-2\files-2.1\android.arch.core\common\1.1.0\8007981f7d7540d89cd18471b8e5dcd2b4f99167\common-1.1.0.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="8007981f7d7540d89cd18471b8e5dcd2b4f99167">
+        <dex dex="C:\Users\GreatSky073\Desktop\android\ScreenCaptureEasy\app\build\intermediates\transforms\preDex\release\41.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\GreatSky073\.gradle\caches\transforms-1\files-1.1\firebase-analytics-10.2.1.aar\bd3ff8f7bad66e786d7a46fb9bdd0fb5\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="0a5d5553c308643a9022f15513ebdd59e9c78d82">
+        <dex dex="C:\Users\GreatSky073\Desktop\android\ScreenCaptureEasy\app\build\intermediates\transforms\preDex\release\14.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\GreatSky073\.gradle\caches\transforms-1\files-1.1\firebase-iid-10.2.1.aar\f02fc61b6da09538af872720eb5f365b\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="399f75732ff1ac159f9e73611536f1508bf18d3b">
+        <dex dex="C:\Users\GreatSky073\Desktop\android\ScreenCaptureEasy\app\build\intermediates\transforms\preDex\release\20.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\GreatSky073\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.1.0.aar\219fb7522291e9a227d4c83623b33182\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="f97cf85b0fe70d37a705111dafa6b1b418ea1650">
+        <dex dex="C:\Users\GreatSky073\Desktop\android\ScreenCaptureEasy\app\build\intermediates\transforms\preDex\release\25.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\GreatSky073\Desktop\android\ScreenCaptureEasy\library\build\intermediates\intermediate-jars\release\classes.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="5c655229ec83e3eba1aaf93f5482c07829867414">
+        <dex dex="C:\Users\GreatSky073\Desktop\android\ScreenCaptureEasy\app\build\intermediates\transforms\preDex\release\42.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\GreatSky073\.gradle\caches\modules-2\files-2.1\com.android.support\support-annotations\27.1.0\39ded76b5e1ce1c5b2688e1d25cdc20ecee32007\support-annotations-27.1.0.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="39ded76b5e1ce1c5b2688e1d25cdc20ecee32007">
+        <dex dex="C:\Users\GreatSky073\Desktop\android\ScreenCaptureEasy\app\build\intermediates\transforms\preDex\release\32.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\GreatSky073\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.1.0.aar\143f4d268f3f172eca5b969832010f25\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="755c70a5a4e439030f67311dbafaa67b111377a6">
+        <dex dex="C:\Users\GreatSky073\Desktop\android\ScreenCaptureEasy\app\build\intermediates\transforms\preDex\release\27.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\GreatSky073\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\cbd6936b295cf4cc0ba5da361f4a9aab\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="e2bbe48deed35056023eed2cdc0cc92e5c7d3617">
+        <dex dex="C:\Users\GreatSky073\Desktop\android\ScreenCaptureEasy\app\build\intermediates\transforms\preDex\release\38.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\GreatSky073\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-26.0.0-alpha1.aar\61493996fa5fa4a398858b84f941a50b\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="c4f45092eee6cdf1a5dbd597b2b6819be652ce2e">
+        <dex dex="C:\Users\GreatSky073\Desktop\android\ScreenCaptureEasy\app\build\intermediates\transforms\preDex\release\8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\GreatSky073\.gradle\caches\transforms-1\files-1.1\filepicker-1.1.1.aar\1ccc57453f9fdbc1b51f1dd194a8cf21\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="c7fd152c455d73dd61eed2e0c11416d004e3b203">
+        <dex dex="C:\Users\GreatSky073\Desktop\android\ScreenCaptureEasy\app\build\intermediates\transforms\preDex\release\6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\GreatSky073\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.13.0\a9283170b7305c8d92d25aff02a6ab7e45d06cbe\okio-1.13.0.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="a9283170b7305c8d92d25aff02a6ab7e45d06cbe">
+        <dex dex="C:\Users\GreatSky073\Desktop\android\ScreenCaptureEasy\app\build\intermediates\transforms\preDex\release\35.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\android\sdk\extras\m2repository\com\android\support\constraint\constraint-layout-solver\1.0.2\constraint-layout-solver-1.0.2.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
+        <dex dex="C:\Users\GreatSky073\Desktop\android\ScreenCaptureEasy\app\build\intermediates\transforms\preDex\release\33.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\GreatSky073\.gradle\caches\transforms-1\files-1.1\play-services-ads-lite-10.2.1.aar\356f52f861033a158235a76667aa5a30\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="ab8343c3aadefce37313ceadd8bc4db1993f2ff0">
+        <dex dex="C:\Users\GreatSky073\Desktop\android\ScreenCaptureEasy\app\build\intermediates\transforms\preDex\release\15.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\GreatSky073\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-10.2.1.aar\c60d3bae51667ab9844987c8031636cf\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="888983f51cf34f57a93ff16832552f2f15937212">
+        <dex dex="C:\Users\GreatSky073\Desktop\android\ScreenCaptureEasy\app\build\intermediates\transforms\preDex\release\19.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\GreatSky073\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.1.0.aar\82055c8fa6babd2d8ed45be6db16d378\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="9a2ea9818b2f556b6663c0e7376bd664ee6c7550">
+        <dex dex="C:\Users\GreatSky073\Desktop\android\ScreenCaptureEasy\app\build\intermediates\transforms\preDex\release\30.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\GreatSky073\.gradle\caches\transforms-1\files-1.1\play-services-gass-10.2.1.aar\d9fbc4a62e71c3d13a2d143ad44c4202\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="bfd85a88cf976eb2c54507cc914d8e8914c2f71e">
+        <dex dex="C:\Users\GreatSky073\Desktop\android\ScreenCaptureEasy\app\build\intermediates\transforms\preDex\release\18.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\GreatSky073\.gradle\caches\transforms-1\files-1.1\support-compat-27.1.0.aar\8c5162f6baa4e65ab8584ce18ff1d534\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="3d46095629eedbd5b79b4d129428fc499473a73b">
+        <dex dex="C:\Users\GreatSky073\Desktop\android\ScreenCaptureEasy\app\build\intermediates\transforms\preDex\release\31.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\GreatSky073\.gradle\caches\transforms-1\files-1.1\play-services-ads-10.2.1.aar\5071354273ed88840ddea90f269b8ed7\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="da5c606c36276a12a356e351882044c6b4b9e8d4">
+        <dex dex="C:\Users\GreatSky073\Desktop\android\ScreenCaptureEasy\app\build\intermediates\transforms\preDex\release\13.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\GreatSky073\.gradle\caches\modules-2\files-2.1\com.squareup.picasso\picasso\2.3.2\d6b7f0093cec6c9faf65dbfd6a6a345d0ed25e27\picasso-2.3.2.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="d6b7f0093cec6c9faf65dbfd6a6a345d0ed25e27">
+        <dex dex="C:\Users\GreatSky073\Desktop\android\ScreenCaptureEasy\app\build\intermediates\transforms\preDex\release\9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\GreatSky073\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp\3.8.1\4d060ca3190df0eda4dc13415532a12e15ca5f11\okhttp-3.8.1.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="4d060ca3190df0eda4dc13415532a12e15ca5f11">
+        <dex dex="C:\Users\GreatSky073\Desktop\android\ScreenCaptureEasy\app\build\intermediates\transforms\preDex\release\34.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\GreatSky073\.gradle\caches\transforms-1\files-1.1\android-image-cropper-2.6.0.aar\70f86de782504c5c2ed3989282c4cace\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="e3a81d9431bc9c7e1e71d664f0227094581bea04">
+        <dex dex="C:\Users\GreatSky073\Desktop\android\ScreenCaptureEasy\app\build\intermediates\transforms\preDex\release\2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\GreatSky073\.gradle\caches\transforms-1\files-1.1\screenshott-2.0.0.aar\39e394f43fdef73f12aae8bbf75eb797\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="41608af0f80d5829a7a0a7ba4bd47f5c213dd113">
+        <dex dex="C:\Users\GreatSky073\Desktop\android\ScreenCaptureEasy\app\build\intermediates\transforms\preDex\release\5.jar" />
     </item>
 
 </items>

@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="10"
-    tools:context="com.minhtam.screencaptureeasy.ot.minhtam.screencaptureeasy.Activity.ImageViewerActivity">
+    tools:context="ot.screenshot.capture.Activity.MainActivity">
+    <!--tools:context="com.minhtam.screencaptureeasy.ot.minhtam.screencaptureeasy.Activity.ImageViewerActivity">-->
 
 
     <RelativeLayout

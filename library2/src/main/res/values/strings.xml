@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Library</string>
+    <string name="dialog_title">Love using our App?</string>
+    <string name="dialog_sub_title">Please rate us in the Google Play</string>
+    <string name="dialog_body">If you enjoy using our App, would you mind taking a moment to rate it? It won\'t take more than a minute.\n Thanks for your support !</string>
+    <string name="dialog_nev">LATER</string>
+    <string name="dialog_pos">RATE NOW</string>
+</resources>

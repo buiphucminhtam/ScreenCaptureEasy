@@ -1,78 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     android:background="@color/colorBackGround"
-    android:padding="@dimen/padding20dp"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
   >
 
-    <Button
-        android:textStyle="bold"
-        android:textColor="#FFF"
-        android:background="@drawable/roundedbutton_start"
-        android:id="@+id/btnStart"
-        android:text="@string/start"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding20dp"
+        android:orientation="vertical">
+        <Button
+            android:textStyle="bold"
+            android:textColor="#FFF"
+            android:background="@drawable/roundedbutton_start"
+            android:id="@+id/btnStart"
+            android:text="@string/start"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-    <Switch
-        android:id="@+id/swnotificationicon"
-        android:layout_marginTop="@dimen/margin20dp"
-        android:textAllCaps="true"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/switchHeight"
-        android:text="@string/notification_icon" />
+        <Switch
+            android:id="@+id/swnotificationicon"
+            android:layout_marginTop="@dimen/margin20dp"
+            android:textAllCaps="true"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/switchHeight"
+            android:text="@string/notification_icon" />
 
-    <RelativeLayout
-        android:layout_marginTop="@dimen/margin10dp"
-        android:padding="@dimen/padding2dp"
-        android:background="#cecece"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </RelativeLayout>
+        <RelativeLayout
+            android:layout_marginTop="@dimen/margin10dp"
+            android:padding="@dimen/padding2dp"
+            android:background="#cecece"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </RelativeLayout>
 
-    <Switch
-        android:layout_marginTop="@dimen/margin10dp"
-        android:id="@+id/swoverlayicon"
-        android:textAllCaps="true"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/switchHeight"
-        android:text="@string/overlay_icon" />
+        <Switch
+            android:layout_marginTop="@dimen/margin10dp"
+            android:id="@+id/swoverlayicon"
+            android:textAllCaps="true"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/switchHeight"
+            android:text="@string/overlay_icon" />
 
-    <RelativeLayout
-        android:layout_marginTop="@dimen/margin10dp"
-        android:padding="@dimen/padding2dp"
-        android:background="#cecece"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </RelativeLayout>
+        <RelativeLayout
+            android:layout_marginTop="@dimen/margin10dp"
+            android:padding="@dimen/padding2dp"
+            android:background="#cecece"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </RelativeLayout>
 
-    <Switch
-        android:layout_marginTop="@dimen/margin10dp"
-        android:id="@+id/swcamerabutton"
-        android:textAllCaps="true"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/switchHeight"
-        android:text="@string/camera_button" />
+        <Switch
+            android:layout_marginTop="@dimen/margin10dp"
+            android:id="@+id/swcamerabutton"
+            android:textAllCaps="true"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/switchHeight"
+            android:text="@string/camera_button" />
 
-    <RelativeLayout
-        android:layout_marginTop="@dimen/margin10dp"
-        android:padding="@dimen/padding2dp"
-        android:background="#cecece"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </RelativeLayout>
+        <RelativeLayout
+            android:layout_marginTop="@dimen/margin10dp"
+            android:padding="@dimen/padding2dp"
+            android:background="#cecece"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </RelativeLayout>
 
 
-    <Switch
-        android:layout_marginTop="@dimen/margin10dp"
-        android:id="@+id/swshake"
-        android:textAllCaps="true"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/switchHeight"
-        android:text="@string/shake" />
+        <Switch
+            android:layout_marginTop="@dimen/margin10dp"
+            android:id="@+id/swshake"
+            android:textAllCaps="true"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/switchHeight"
+            android:text="@string/shake" />
+    </LinearLayout>
 
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="@string/banner1"/>
 
 </LinearLayout>

@@ -16,12 +16,18 @@ import android.widget.Button;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 import ot.screenshot.capture.Const;
 import ot.screenshot.capture.Service.ServiceCapture;
 import ot.screenshot.capture.Util.ScreenshotManager;
 import ot.screenshot.capture.Util.SharedPreferencesManager;
+import pt.content.helper.AdsHelper;
+import pt.content.helper.RateHelper;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdsHelper.AdLoadFailListener{
     private static final int REQUEST_WRITE_PERMISSION = 786;
 
     private ScreenshotManager screenshotManager;
@@ -32,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferencesManager sharedPreferencesManager;
 
     private Toast toast;
+
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +56,21 @@ public class MainActivity extends AppCompatActivity {
         AddControl();
 
         AddEvent();
+
+//        String locale = this.getResources().getConfiguration().locale.getCountry();
+//        Toast.makeText(this, ""+locale, Toast.LENGTH_SHORT).show();
+
+//        MobileAds.initialize(this, getString(ot.screenshot.capture.R.string.appID));
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//        mAdView.loadAd(adRequest);
+
+        if (!RateHelper.isPremium(this)) {
+            MobileAds.initialize(this, getString(ot.screenshot.capture.R.string.appID));
+            AdRequest adRequest = new AdRequest.Builder().build();
+            mAdView.loadAd(adRequest);
+//            Toast.makeText(this, "Vào Ads", Toast.LENGTH_SHORT).show();
+//            Log.d("S7", "onCreate: ");
+        }
     }
 
     private void setTheme() {
@@ -103,6 +126,8 @@ public class MainActivity extends AppCompatActivity {
         swOverlayIcon.setChecked(sharedPreferencesManager.getOverlayIconMode());
         swCameraButton.setChecked(sharedPreferencesManager.getCameraButtonMode());
         swShake.setChecked(sharedPreferencesManager.getShakeMode());
+
+        mAdView = (AdView) findViewById(ot.screenshot.capture.R.id.adView);
 
         if (isServiceRunning(ServiceCapture.class)) {
             btnStart.setText(getString(ot.screenshot.capture.R.string.stop));
@@ -224,12 +249,36 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        RateHelper.showOnAction(this);
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        RateHelper.onStart(this);
+    }
 
+    @Override
+    public void onBackPressed() {
+//        Toast.makeText(this, "Da chay on backpress", Toast.LENGTH_SHORT).show();
+        if (RateHelper.showOnBackpress(this))
+            super.onBackPressed();
+
+    }
+
+//    @Override
+//    protected  void onStop() {
+//        super.onStop();
+//        RateHelper.onStop(this);
+//    }
 
     @Override
     protected void onStop() {
         super.onStop();
+        RateHelper.onStop(this);
         finish();
     }
 
@@ -242,5 +291,15 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return false;
+    }
+
+    @Override
+    public void onAdLoadFail() {
+
+    }
+
+    @Override
+    public void onLoadAds(View adView) {
+
     }
 }
