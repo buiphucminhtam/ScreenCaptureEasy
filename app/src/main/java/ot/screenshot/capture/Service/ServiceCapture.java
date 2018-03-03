@@ -20,6 +20,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import ot.screenshot.capture.Activity.ImageViewerActivity;
 import ot.screenshot.capture.Activity.MainActivity;
@@ -44,11 +45,11 @@ public class ServiceCapture extends Service {
 
     private boolean saveSilently = false;
     private long countDownValue = 0;
-    private final long delayOverlayIcon = 200;
     private String fileName = "yyyyMMdd_hhmmss";
     private String filePath = Const.defaultLocationSDCard;
     private String fileType = "PNG";
     private boolean overlayIsShowing = false;
+    private boolean isRegisteredReceiver = false;
 
     public ServiceCapture() {
     }
@@ -138,6 +139,8 @@ public class ServiceCapture extends Service {
             IntentFilter filter = new IntentFilter(Intent.ACTION_CAMERA_BUTTON);
             filter.addAction(Intent.ACTION_PACKAGE_ADDED);
             registerReceiver(receiver, filter);
+            //Save state register receiver
+            isRegisteredReceiver = true;
         }
     }
 
@@ -154,6 +157,8 @@ public class ServiceCapture extends Service {
 
     private TextView tvCountDown;
     private WindowManager.LayoutParams tvParams;
+    private ScreenshotManager.onSavedImageListener onSavedImageListener;
+
     private void startCaptureScreen() {
         if (mWindowManager != null) {
             if (overlayIsShowing) {
@@ -178,6 +183,38 @@ public class ServiceCapture extends Service {
             mWindowManager.addView(tvCountDown,tvParams);
         }
 
+        if (onSavedImageListener == null) {
+            onSavedImageListener = new ScreenshotManager.onSavedImageListener() {
+                @Override
+                public void onSavedSuccess() {
+                    if (!overlayIsShowing && overlayIcon!=null) {
+                        mWindowManager.addView(overlayIcon,params);
+                        overlayIsShowing = true;
+                    }
+                    if (!saveSilently) {
+                        Intent intentView = new Intent(getApplicationContext(), ImageViewerActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intentView);
+                    }
+                }
+
+                @Override
+                public void onSavedFailed() {
+                    if (!overlayIsShowing && overlayIcon!=null) {
+                        mWindowManager.addView(overlayIcon,params);
+                        overlayIsShowing = true;
+                    }
+                    if (!saveSilently) {
+                        Intent intentView = new Intent(getApplicationContext(), ImageViewerActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intentView);
+                    }
+
+                    Toast.makeText(ServiceCapture.this, "failed", Toast.LENGTH_SHORT).show();
+                }
+            };
+
+            screenshotManager.setOnSavedImageListener(onSavedImageListener);
+        }
+
         new CountDownTimer(countDownValue+1000, 1000) {
             @Override
             public void onTick(long l) {
@@ -197,22 +234,6 @@ public class ServiceCapture extends Service {
                            screenshotManager.takeScreenshot(getApplicationContext(),fileName,filePath,fileType);
                        }
                    },200);
-
-
-                   new Handler().postDelayed(new Runnable() {
-                       @Override
-                       public void run() {
-                           if (!overlayIsShowing && overlayIcon!=null) {
-                               mWindowManager.addView(overlayIcon,params);
-                               overlayIsShowing = true;
-                           }
-                           if (!saveSilently) {
-                               Intent intentView = new Intent(getApplicationContext(), ImageViewerActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                               startActivity(intentView);
-                           }
-                       }
-                   },delayOverlayIcon);
-
             }
         }.start();
 
@@ -220,6 +241,8 @@ public class ServiceCapture extends Service {
 
         Log.d("ServiceCapture", Const.ACTION_SCREEN_CAPTURE_NOTIFICATION);
     }
+
+
 
 //    public void takeScreenShot() {
 ////        rootView = ((Activity)getApplicationContext()).getWindow().getDecorView().findViewById(android.R.id.content).getRootView();
@@ -385,7 +408,9 @@ public class ServiceCapture extends Service {
             mWindowManager.removeView(overlayIcon);
         }
 
-        unregisterReceiver(receiver);
+        //Checking the fucking receiver is registered or not
+        if(isRegisteredReceiver)
+            unregisterReceiver(receiver);
 
     }
 }

@@ -11,9 +11,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
-import ot.screenshot.capture.Adapter.AdapterImage;
-import ot.screenshot.capture.Interface.OnItemClickListener;
-import ot.screenshot.capture.Util.SharedPreferencesManager;
 import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.io.File;
@@ -25,9 +22,12 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+
+import ot.screenshot.capture.Adapter.AdapterImage;
+import ot.screenshot.capture.Interface.OnItemClickListener;
+import ot.screenshot.capture.Util.SharedPreferencesManager;
 
 public class ImageViewerActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -86,13 +86,22 @@ public class ImageViewerActivity extends AppCompatActivity {
         // List all the items within the folder.
         File[] files = new File(directoryPath).listFiles(new ImageFileFilter());
 
+        File fileTemp = null;
         for (File file : files) {
             if (isImageFile(file.getAbsolutePath())) {
-                listPathImage.add(file.getAbsolutePath());
+                if(fileTemp==null){
+                    fileTemp = file;
+                    listPathImage.add(file.getAbsolutePath());
+                }
+                else{
+                    if (fileTemp.lastModified() < file.lastModified()) {
+                        listPathImage.add(0, file.getAbsolutePath());
+                    } else {
+                        listPathImage.add(file.getAbsolutePath());
+                    }
+                }
             }
         }
-
-        Collections.reverse(listPathImage);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapterImage);
         if(listPathImage.size() > 0)
@@ -200,8 +209,8 @@ public class ImageViewerActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onPostResume() {
-        super.onPostResume();
+    protected void onResume() {
+        super.onResume();
 
         if (adapterImage != null) {
             getAllImages();

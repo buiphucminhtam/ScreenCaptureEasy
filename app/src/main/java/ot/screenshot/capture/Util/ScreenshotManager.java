@@ -21,13 +21,13 @@ import android.view.Display;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import ot.screenshot.capture.R;
-
 import java.io.File;
 import java.nio.ByteBuffer;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import ot.screenshot.capture.R;
 
 /**
  * Created by Tam on 10/18/2017.
@@ -38,9 +38,14 @@ public class ScreenshotManager {
     private static final int VIRTUAL_DISPLAY_FLAGS = DisplayManager.VIRTUAL_DISPLAY_FLAG_OWN_CONTENT_ONLY | DisplayManager.VIRTUAL_DISPLAY_FLAG_PUBLIC;
     public static final ScreenshotManager INSTANCE = new ScreenshotManager();
     private Intent mIntent;
+    private onSavedImageListener onSavedImageListener;
 
     public static ScreenshotManager getInstance() {
         return INSTANCE;
+    }
+
+    public void setOnSavedImageListener(ScreenshotManager.onSavedImageListener onSavedImageListener) {
+        this.onSavedImageListener = onSavedImageListener;
     }
 
     public void requestScreenshotPermission(@NonNull Activity activity, int requestId) {
@@ -116,8 +121,12 @@ public class ScreenshotManager {
                             File file = ImageSaver.getInstance().saveScreenshotToPicturesFolder(context, bitmap, dateFormat.format(date),filePath,fileType);
 
                             Toast.makeText(context, context.getString(R.string.saved), Toast.LENGTH_SHORT).show();
+
+                            //Call back
+                            if(onSavedImageListener!=null) onSavedImageListener.onSavedSuccess();
                             Log.d("ServiceCapture", "File != null");
                         } catch (Exception e) {
+                            if(onSavedImageListener!=null) onSavedImageListener.onSavedFailed();
                             e.printStackTrace();
                         }
                     }
@@ -135,6 +144,12 @@ public class ScreenshotManager {
             }
         }, null);
         return true;
+    }
+
+
+    public interface onSavedImageListener{
+        void onSavedSuccess();
+        void onSavedFailed();
     }
 }
 
