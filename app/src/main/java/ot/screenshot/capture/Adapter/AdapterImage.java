@@ -11,12 +11,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import ot.screenshot.capture.Interface.OnItemClickListener;
-import ot.screenshot.capture.R;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.List;
+
+import ot.screenshot.capture.Interface.OnItemClickListener;
+import ot.screenshot.capture.R;
+import ot.screenshot.capture.Util.ToastManager;
 
 /**
  * Created by Tam on 11/8/2017.
@@ -87,14 +89,14 @@ public class AdapterImage extends RecyclerView.Adapter<AdapterImage.ViewHolder> 
                 public void onClick(DialogInterface dialogInterface, int i) {
                     File file = new File(listPathImages.get(position));
                     if (file.delete()) {
-                        Toast.makeText(context, context.getString(R.string.deleteSuccess), Toast.LENGTH_SHORT).show();
+                        ToastManager.getInstanse().showToast(context, context.getString(R.string.deleteSuccess), Toast.LENGTH_SHORT);
                         listPathImages.remove(position);
                         notifyItemRangeRemoved(position,listPathImages.size());
                         if (listPathImages.size() == 0) {
                             notifyDataSetChanged();
                         }
                     } else {
-                        Toast.makeText(context, context.getString(R.string.deleteFailed), Toast.LENGTH_SHORT).show();
+                        ToastManager.getInstanse().showToast(context, context.getString(R.string.deleteFailed), Toast.LENGTH_SHORT);
                     }
                 }
             })

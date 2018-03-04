@@ -40,7 +40,7 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name="ot.screenshot.capture.Activity.ImageViewerActivity"/>
+        <activity android:name="ot.screenshot.capture.Activity.ImageViewerActivity" android:launchMode="singleInstance"/>
 
         <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat"/>

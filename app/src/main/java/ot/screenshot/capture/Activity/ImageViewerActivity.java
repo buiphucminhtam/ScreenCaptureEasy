@@ -211,7 +211,6 @@ public class ImageViewerActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
         if (adapterImage != null) {
             getAllImages();
             adapterImage.notifyDataSetChanged();

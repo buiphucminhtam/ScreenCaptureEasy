@@ -28,6 +28,7 @@ import ot.screenshot.capture.Const;
 import ot.screenshot.capture.R;
 import ot.screenshot.capture.Util.ScreenshotManager;
 
+import ot.screenshot.capture.Util.ToastManager;
 import safety.com.br.android_shake_detector.core.ShakeCallback;
 import safety.com.br.android_shake_detector.core.ShakeDetector;
 import safety.com.br.android_shake_detector.core.ShakeOptions;
@@ -50,6 +51,8 @@ public class ServiceCapture extends Service {
     private String fileType = "PNG";
     private boolean overlayIsShowing = false;
     private boolean isRegisteredReceiver = false;
+    private boolean isShakeModeOn = false;
+    private boolean isCapturing = false;
 
     public ServiceCapture() {
     }
@@ -102,16 +105,18 @@ public class ServiceCapture extends Service {
             showOverlayIcon();
         }
 
-        if (intent.getBooleanExtra(getApplicationContext().getString(R.string.save_shake), false)) {
-            ShakeOptions options = new ShakeOptions()
-                    .background(true)
-                    .interval(1000)
-                    .shakeCount(1)
-                    .sensibility(2.0f);
+        if (isShakeModeOn = intent.getBooleanExtra(getApplicationContext().getString(R.string.save_shake), false)) {
+            if (shakeDetector == null) {
+                ShakeOptions options = new ShakeOptions()
+                        .background(true)
+                        .interval(1000)
+                        .shakeCount(1)
+                        .sensibility(2.0f);
 
-            shakeDetector = new ShakeDetector(options).start(this, new ShakeCallback() {
-                @Override
-                public void onShake() {
+
+                shakeDetector = new ShakeDetector(options).start(this, new ShakeCallback() {
+                    @Override
+                    public void onShake() {
 //                    if (mWindowManager != null) {
 //                        mWindowManager.removeView(overlayIcon);
 //                        screenshotManager.takeScreenshot(getApplicationContext(),fileName,filePath,fileType);
@@ -127,10 +132,11 @@ public class ServiceCapture extends Service {
 //                            }
 //                        }.start();
 //                    }
-
-                    startCaptureScreen();
-                }
-            });
+                        if (isShakeModeOn)
+                            startCaptureScreen();
+                    }
+                });
+            }
         }
 
 
@@ -160,6 +166,10 @@ public class ServiceCapture extends Service {
     private ScreenshotManager.onSavedImageListener onSavedImageListener;
 
     private void startCaptureScreen() {
+        if (isCapturing) {
+            return;
+        }
+        isCapturing = true;
         if (mWindowManager != null) {
             if (overlayIsShowing) {
                 mWindowManager.removeView(overlayIcon);
@@ -195,6 +205,9 @@ public class ServiceCapture extends Service {
                         Intent intentView = new Intent(getApplicationContext(), ImageViewerActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intentView);
                     }
+
+                    //set is capture -> false when done
+                    isCapturing = false;
                 }
 
                 @Override
@@ -208,7 +221,9 @@ public class ServiceCapture extends Service {
                         startActivity(intentView);
                     }
 
-                    Toast.makeText(ServiceCapture.this, "failed", Toast.LENGTH_SHORT).show();
+                   ToastManager.getInstanse().showToast(ServiceCapture.this, "failed", Toast.LENGTH_SHORT);
+                    //set is capture -> false when done
+                    isCapturing = false;
                 }
             };
 
@@ -403,6 +418,7 @@ public class ServiceCapture extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        screenshotManager.stopMediaProjection();
 //        unregisterReceiver(receiver);
         if (overlayIcon != null && overlayIsShowing) {
             mWindowManager.removeView(overlayIcon);
@@ -412,5 +428,9 @@ public class ServiceCapture extends Service {
         if(isRegisteredReceiver)
             unregisterReceiver(receiver);
 
+        if (shakeDetector != null) {
+            shakeDetector.destroy(this);
+            shakeDetector = null;
+        }
     }
 }
