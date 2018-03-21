@@ -4,6 +4,7 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -76,7 +77,7 @@ public class SettingActivity extends PreferenceActivity implements SharedPrefere
 //        Add ADS
         AdView mAdView = new AdView(this);
         mAdView.setAdSize(AdSize.MEDIUM_RECTANGLE);
-        mAdView.setAdUnitId(getString(R.string.banner3));
+        mAdView.setAdUnitId(getString(R.string.banner2));
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 AbsListView.LayoutParams.FILL_PARENT,
@@ -100,6 +101,7 @@ public class SettingActivity extends PreferenceActivity implements SharedPrefere
     private void settingUpActionBar() {
         getLayoutInflater().inflate(ot.screenshot.capture.R.layout.toolbar, (ViewGroup)findViewById(android.R.id.content));
         Toolbar toolbar = (Toolbar)findViewById(ot.screenshot.capture.R.id.toolbar);
+        toolbar.setTitleTextColor(Color.WHITE);
         setActionBar(toolbar);
 
         getActionBar().setDisplayHomeAsUpEnabled(true);

@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements AdsHelper.AdLoadF
                             adViewNE.setAdSize(AdSize.SMART_BANNER);
                         }
 //                        adViewNE.setAdSize(new AdSize(AdSize.FULL_WIDTH, (int) adsHeight-2));
-                        adViewNE.setAdUnitId(getString(R.string.banner3));
+                        adViewNE.setAdUnitId(getString(R.string.banner1));
 
                         AdRequest.Builder adRequestBuilder = new AdRequest.Builder();
                         adRequestBuilder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR);

@@ -10,9 +10,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/padding20dp"
+        android:paddingTop="@dimen/padding5dp"
+        android:paddingBottom="@dimen/padding5dp"
+        android:paddingLeft="@dimen/padding20dp"
+        android:paddingRight="@dimen/padding20dp"
         android:gravity="center_horizontal"
-        android:layout_marginBottom="@dimen/margin10dp"
+        android:layout_marginBottom="2dp"
         android:orientation="vertical">
         <!--<Button-->
             <!--android:textStyle="bold"-->
@@ -92,7 +95,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:id="@+id/linearLayoutAds"
         android:gravity="center_horizontal"
         android:layout_width="match_parent"
