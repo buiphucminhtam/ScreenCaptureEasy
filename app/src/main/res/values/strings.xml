@@ -61,7 +61,7 @@
     <string name="saved">Saved</string>
 
     <string name="appID">ca-app-pub-6948561001881396~5064533115</string>
-    <!--<string name="banner1">ca-app-pub-3940256099942544/6300978111</string>-->
+    <string name="banner3">ca-app-pub-3940256099942544/6300978111</string>
     <string name="banner1">ca-app-pub-6948561001881396/8592714580</string>
     <string name="banner2">ca-app-pub-6948561001881396/5068148952</string>
 </resources>

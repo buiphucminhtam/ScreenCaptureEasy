@@ -13,9 +13,13 @@
             android:entries="@array/countdownArray"
             android:entryValues="@array/countdownValues"/>
 
-        <Preference android:key="@string/key_ads"></Preference>
+        <!--<Preference android:key="@string/key_ads"-->
+            <!--android:layout="@layout/ads">-->
+        <!--</Preference>-->
 
     </PreferenceCategory>
+
+    <!--<com.example.adpreference.AdPreference android:layout="@layout/ads"/>-->
 
     <PreferenceCategory android:title="@string/prefLayoutTittle">
         <ListPreference android:title="@string/theme"

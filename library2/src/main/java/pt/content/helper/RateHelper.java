@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -58,14 +59,24 @@ public class RateHelper {
             RateHelper.waitToShow(context);
         }
     }
+    public static void showOnAction(PreferenceActivity context) {
+        Log.d("RateHelper", "showOnAction :");
+        if (!RateHelper.isRated(context) && !RateHelper.hadShow(context) && RateHelper.checkShow(context) && enable(context)) {
+            Log.d("RateHelper", "showOnAction : inside");
+            RateHelper.waitToShow(context);
+        }
+    }
+
+    private static void waitToShow(final PreferenceActivity context) {
+    }
+    private static boolean show(final PreferenceActivity context, final boolean isBackpress) {
+        return true;
+    }
 
     public static boolean showOnBackpress(AppCompatActivity context) {
-
-        if (RateHelper.count(context, "backpress") % 5 == 0 && !RateHelper.isRated(context) && enable(context)) {
-            if (!RateHelper.show(context, true))
-                return true;
-            else return false;
-        } else
+            return true;
+    }
+    public static boolean showOnBackpress(PreferenceActivity context) {
             return true;
     }
 
@@ -108,85 +119,11 @@ public class RateHelper {
     }
 
     private static void waitToShow(final AppCompatActivity context) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                int count = 0;
-                while (count++ <= 30 && !loaded) {
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                Log.d("RateHelper", "run :" + loaded);
-                Log.d("RateHelper", "run :" + count);
-                if (loaded) {
-                    context.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            show(context, false);
-                        }
-                    });
-
-                }
-            }
-        }).start();
     }
 
+
+
     private static boolean show(final AppCompatActivity context, final boolean isBackpress) {
-        final int level = PreferenceManager.getDefaultSharedPreferences(context).getInt("level", 0);
-        if (level == 0)
-            return false;
-        PreferenceManager.getDefaultSharedPreferences(context).edit().putBoolean("SHOW_TIME", true).apply();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                ApiHelper.get("http://45.77.28.5/tracking/dialog_count.php");
-            }
-        }).start();
-        FancyAlertDialog.Builder alert = new FancyAlertDialog.Builder(context)
-                .setBackgroundColor(android.R.color.white)
-                .setTextTitle(getString(context, "title", R.string.dialog_title))
-                .setTitleColor(R.color.dialog_title)
-
-
-                .setTextSubTitle(getString(context, "sub_title", R.string.dialog_sub_title))
-                .setSubtitleColor(R.color.dialog_sub_title)
-                .setBody(getString(context, "body", R.string.dialog_body))
-                .setBodyColor(R.color.dialog_body)
-                .setNegativeColor(R.color.dialog_negative_button)
-                .setNegativeButtonText(getString(context, "nev_bt", R.string.dialog_nev))
-                .setOnNegativeClicked(new FancyAlertDialog.OnNegativeClicked() {
-                    @Override
-                    public void OnClick(View view, Dialog dialog) {
-                        dialog.dismiss();
-                    }
-                })
-                .setPositiveButtonText(getString(context, "pos_bt", R.string.dialog_pos))
-                .setPositiveColor(R.color.dialog_positive_button)
-                .setOnPositiveClicked(new FancyAlertDialog.OnPositiveClicked() {
-                    @Override
-                    public void OnClick(View view, Dialog dialog) {
-                        PreferenceManager.getDefaultSharedPreferences(context).edit().putBoolean("RATED", true).apply();
-                        if (level == 2)
-                            PreferenceManager.getDefaultSharedPreferences(context).edit().putBoolean("PREMIUM", true).apply();
-                        gotoPlay(context);
-                        dialog.dismiss();
-                    }
-                })
-                .setOnDismiss(new FancyAlertDialog.OnDismiss() {
-                    @Override
-                    public void onDismiss(DialogInterface dialog) {
-                        if (isBackpress)
-                            context.finish();
-                        if (count(context, "DISMISS_COUNT") > 3)
-                            PreferenceManager.getDefaultSharedPreferences(context).edit().putBoolean("SHOW_ENABLE", false).apply();
-
-                    }
-                })
-                .build();
-        alert.show();
         return true;
     }
 
@@ -202,14 +139,6 @@ public class RateHelper {
 
     private static Intent rateIntentForUrl(Context context, String url) {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(String.format("%s?id=%s", url, context.getPackageName())));
-        int flags = Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_MULTIPLE_TASK;
-        if (Build.VERSION.SDK_INT >= 21) {
-            flags |= Intent.FLAG_ACTIVITY_NEW_DOCUMENT;
-        } else {
-            //noinspection deprecation
-            flags |= Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET;
-        }
-        intent.addFlags(flags);
         return intent;
     }
 

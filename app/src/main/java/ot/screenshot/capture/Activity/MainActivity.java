@@ -8,19 +8,24 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
 import ot.screenshot.capture.Const;
+import ot.screenshot.capture.R;
 import ot.screenshot.capture.Service.ServiceCapture;
 import ot.screenshot.capture.Util.ScreenshotManager;
 import ot.screenshot.capture.Util.SharedPreferencesManager;
@@ -39,7 +44,9 @@ public class MainActivity extends AppCompatActivity implements AdsHelper.AdLoadF
 
     private Toast toast;
 
-    private AdView mAdView;
+//    private AdView mAdView;
+    private LinearLayout linearLayoutAds;
+    private float adsHeight = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,20 +64,47 @@ public class MainActivity extends AppCompatActivity implements AdsHelper.AdLoadF
 
         AddEvent();
 
-//        String locale = this.getResources().getConfiguration().locale.getCountry();
-//        Toast.makeText(this, ""+locale, Toast.LENGTH_SHORT).show();
-
-//        MobileAds.initialize(this, getString(ot.screenshot.capture.R.string.appID));
-//        AdRequest adRequest = new AdRequest.Builder().build();
-//        mAdView.loadAd(adRequest);
-
+//        load ADS
         if (!RateHelper.isPremium(this)) {
             MobileAds.initialize(this, getString(ot.screenshot.capture.R.string.appID));
-            AdRequest adRequest = new AdRequest.Builder().build();
-            mAdView.loadAd(adRequest);
-//            Toast.makeText(this, "Vào Ads", Toast.LENGTH_SHORT).show();
+            loadAds();
+//            AdRequest adRequest = new AdRequest.Builder().build();
+//            mAdView.loadAd(adRequest);
 //            Log.d("S7", "onCreate: ");
         }
+    }
+
+    public void loadAds(){
+        final float density  = getResources().getDisplayMetrics().density;
+        final ViewTreeObserver observer= linearLayoutAds.getViewTreeObserver();
+        observer.addOnGlobalLayoutListener(
+                new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        if (adsHeight!=-1)return;
+                        adsHeight = linearLayoutAds.getHeight()/density;
+                        Log.d("Log", "onCreateHeight: "+adsHeight);
+
+                        AdView adViewNE = new AdView(MainActivity.this);
+                        Log.d("Log", "onCreate: "+((int)adsHeight));
+                        if (adsHeight>252){
+                            adViewNE.setAdSize(AdSize.MEDIUM_RECTANGLE);
+                        }else if (adsHeight>102){
+                            adViewNE.setAdSize(AdSize.LARGE_BANNER);
+                        }else{
+                            adViewNE.setAdSize(AdSize.SMART_BANNER);
+                        }
+//                        adViewNE.setAdSize(new AdSize(AdSize.FULL_WIDTH, (int) adsHeight-2));
+                        adViewNE.setAdUnitId(getString(R.string.banner3));
+
+                        AdRequest.Builder adRequestBuilder = new AdRequest.Builder();
+                        adRequestBuilder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
+                        linearLayoutAds.addView(adViewNE);
+                        adViewNE.loadAd(adRequestBuilder.build());
+                        Log.d("Log", "Width: " + linearLayoutAds.getWidth()/density);
+                        Log.d("Log", "Height: " + linearLayoutAds.getHeight()/density);
+                    }
+                });
     }
 
     private void setTheme() {
@@ -127,7 +161,9 @@ public class MainActivity extends AppCompatActivity implements AdsHelper.AdLoadF
         swCameraButton.setChecked(sharedPreferencesManager.getCameraButtonMode());
         swShake.setChecked(sharedPreferencesManager.getShakeMode());
 
-        mAdView = (AdView) findViewById(ot.screenshot.capture.R.id.adView);
+//        mAdView = (AdView) findViewById(ot.screenshot.capture.R.id.adView);
+        linearLayoutAds = (LinearLayout)findViewById(R.id.linearLayoutAds);
+
 
         if (isServiceRunning(ServiceCapture.class)) {
             btnStart.setText(getString(ot.screenshot.capture.R.string.stop));
@@ -254,13 +290,11 @@ public class MainActivity extends AppCompatActivity implements AdsHelper.AdLoadF
         super.onResume();
         RateHelper.showOnAction(this);
     }
-
     @Override
     protected void onStart() {
         super.onStart();
         RateHelper.onStart(this);
     }
-
     @Override
     public void onBackPressed() {
 //        Toast.makeText(this, "Da chay on backpress", Toast.LENGTH_SHORT).show();
@@ -268,13 +302,6 @@ public class MainActivity extends AppCompatActivity implements AdsHelper.AdLoadF
             super.onBackPressed();
 
     }
-
-//    @Override
-//    protected  void onStop() {
-//        super.onStop();
-//        RateHelper.onStop(this);
-//    }
-
     @Override
     protected void onStop() {
         super.onStop();

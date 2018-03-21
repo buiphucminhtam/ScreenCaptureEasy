@@ -10,15 +10,29 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toolbar;
 
 import com.github.angads25.filepicker.view.FilePickerPreference;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
+import ot.screenshot.capture.R;
 import ot.screenshot.capture.Util.SharedPreferencesManager;
+import pt.content.helper.AdsHelper;
+import pt.content.helper.RateHelper;
 
-public class SettingActivity extends PreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class SettingActivity extends PreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener, AdsHelper.AdLoadFailListener {
 
     private SharedPreferences prefs;
     private String defaultLocation;
@@ -34,13 +48,14 @@ public class SettingActivity extends PreferenceActivity implements SharedPrefere
         settingUpActionBar();
 
 
-        addPreferencesFromResource(ot.screenshot.capture.R.xml.setting);
+        addPreferencesFromResource(R.xml.setting);
+
         prefs = getPreferenceScreen().getSharedPreferences();
         ListPreference listCountDown = (ListPreference) findPreference(getString(ot.screenshot.capture.R.string.countdownValues_key));
         ListPreference listThemes = (ListPreference) findPreference(getString(ot.screenshot.capture.R.string.theme_key));
         ListPreference listFileName = (ListPreference) findPreference(getString(ot.screenshot.capture.R.string.filename_key));
         FilePickerPreference preference = (FilePickerPreference) findPreference(getString(ot.screenshot.capture.R.string.savelocation_key));
-        Preference preferenceAds = findPreference(getString(ot.screenshot.capture.R.string.key_ads));
+//        Preference preferenceAds = findPreference(getString(ot.screenshot.capture.R.string.key_ads));
 
 
         //Set show default
@@ -58,6 +73,28 @@ public class SettingActivity extends PreferenceActivity implements SharedPrefere
         //set default for file location
         preference.setSummary(prefs.getString(getString(ot.screenshot.capture.R.string.savelocation_key), defaultLocation));
 
+//        Add ADS
+        AdView mAdView = new AdView(this);
+        mAdView.setAdSize(AdSize.MEDIUM_RECTANGLE);
+        mAdView.setAdUnitId(getString(R.string.banner3));
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                AbsListView.LayoutParams.FILL_PARENT,
+                AbsListView.LayoutParams.FILL_PARENT
+        );
+        params.setMargins(0, 50, 0, 50); //left,top,right,bottom
+
+        ListView v = getListView();
+        v.setLayoutParams(params);
+        v.setForegroundGravity(Gravity.CENTER_HORIZONTAL);
+        v.addHeaderView(mAdView);
+        if (!RateHelper.isPremium(this)) {
+            MobileAds.initialize(this, getString(ot.screenshot.capture.R.string.appID));
+            AdRequest adRequest = new AdRequest.Builder().build();
+            mAdView.loadAd(adRequest);
+//            Log.d("S7", "onCreate: ");
+        }
+
     }
 
     private void settingUpActionBar() {
@@ -67,7 +104,7 @@ public class SettingActivity extends PreferenceActivity implements SharedPrefere
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
-        int topMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, (int) getResources().getDimension(ot.screenshot.capture.R.dimen.padding20dp) + 30, getResources().getDisplayMetrics());
+        int topMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, (int) getResources().getDimension(ot.screenshot.capture.R.dimen.padding20dp) - 18, getResources().getDisplayMetrics());
         getListView().setPadding(0, topMargin, 0, 0);
     }
 
@@ -84,6 +121,15 @@ public class SettingActivity extends PreferenceActivity implements SharedPrefere
                 setTheme(ot.screenshot.capture.R.style.BlackTheme);
             }
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -117,22 +163,6 @@ public class SettingActivity extends PreferenceActivity implements SharedPrefere
                 .unregisterOnSharedPreferenceChangeListener(this);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        getPreferenceScreen().getSharedPreferences()
-                .registerOnSharedPreferenceChangeListener(this);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     //Method to check if the service is running
     private boolean isServiceRunning(Class<?> serviceClass) {
         ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
@@ -147,7 +177,40 @@ public class SettingActivity extends PreferenceActivity implements SharedPrefere
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        if (RateHelper.showOnBackpress(this))
+            super.onBackPressed();
         startActivity(new Intent(this,MainActivity.class));
         finish();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        RateHelper.showOnAction(this);
+        getPreferenceScreen().getSharedPreferences()
+                .registerOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        RateHelper.onStart(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        RateHelper.onStop(this);
+        finish();
+    }
+
+    @Override
+    public void onAdLoadFail() {
+
+    }
+
+    @Override
+    public void onLoadAds(View adView) {
+
     }
 }

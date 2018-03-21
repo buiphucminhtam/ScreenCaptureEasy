@@ -11,19 +11,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/padding20dp"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/margin10dp"
         android:orientation="vertical">
-        <Button
-            android:textStyle="bold"
-            android:textColor="#FFF"
-            android:background="@drawable/roundedbutton_start"
-            android:id="@+id/btnStart"
-            android:text="@string/start"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        <!--<Button-->
+            <!--android:textStyle="bold"-->
+            <!--android:textColor="#FFF"-->
+            <!--android:background="@drawable/roundedbutton_start"-->
+            <!--android:id="@+id/btnStart"-->
+            <!--android:text="@string/start"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content" />-->
 
         <Switch
             android:id="@+id/swnotificationicon"
-            android:layout_marginTop="@dimen/margin20dp"
+            android:layout_marginTop="@dimen/margin10dp"
             android:textAllCaps="true"
             android:layout_width="match_parent"
             android:layout_height="@dimen/switchHeight"
@@ -77,14 +79,33 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/switchHeight"
             android:text="@string/shake" />
+
+        <Button
+            android:textStyle="bold"
+            android:textColor="#FFF"
+            android:layout_marginTop="@dimen/padding20dp"
+            android:background="@drawable/roundedbutton_start"
+            android:id="@+id/btnStart"
+            android:text="@string/start"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/adView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        ads:adSize="SMART_BANNER"
-        ads:adUnitId="@string/banner1"/>
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/linearLayoutAds"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </LinearLayout>
+
+    <!--<com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"-->
+        <!--android:id="@+id/adView"-->
+        <!--android:paddingTop="2dp"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="bottom"-->
+        <!--ads:adSize="FULL_WIDTHx90"-->
+        <!--ads:adUnitId="@string/banner1"/>-->
 
 </LinearLayout>
