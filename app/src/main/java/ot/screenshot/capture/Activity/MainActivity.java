@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
 
     private Toast toast;
 
-//    private AdView mAdView;
     private LinearLayout linearLayoutAds;
     private float adsHeight = -1;
 
