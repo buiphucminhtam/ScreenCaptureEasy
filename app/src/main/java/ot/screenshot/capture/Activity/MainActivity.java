@@ -8,7 +8,6 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,10 +28,9 @@ import ot.screenshot.capture.R;
 import ot.screenshot.capture.Service.ServiceCapture;
 import ot.screenshot.capture.Util.ScreenshotManager;
 import ot.screenshot.capture.Util.SharedPreferencesManager;
-import pt.content.helper.AdsHelper;
-import pt.content.helper.RateHelper;
+import pt.content.helper.RSHelper;
 
-public class MainActivity extends AppCompatActivity implements AdsHelper.AdLoadFailListener{
+public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_WRITE_PERMISSION = 786;
 
     private ScreenshotManager screenshotManager;
@@ -65,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements AdsHelper.AdLoadF
         AddEvent();
 
 //        load ADS
-        if (!RateHelper.isPremium(this)) {
+        if (!RSHelper.isPremium(this)) {
             MobileAds.initialize(this, getString(ot.screenshot.capture.R.string.appID));
             loadAds();
 //            AdRequest adRequest = new AdRequest.Builder().build();
@@ -288,24 +286,24 @@ public class MainActivity extends AppCompatActivity implements AdsHelper.AdLoadF
     @Override
     protected void onResume() {
         super.onResume();
-        RateHelper.showOnAction(this);
+        RSHelper.showOnAction(this);
     }
     @Override
     protected void onStart() {
         super.onStart();
-        RateHelper.onStart(this);
+        RSHelper.onStart(this);
     }
     @Override
     public void onBackPressed() {
 //        Toast.makeText(this, "Da chay on backpress", Toast.LENGTH_SHORT).show();
-        if (RateHelper.showOnBackpress(this))
+        if (RSHelper.showOnBackpress(this))
             super.onBackPressed();
 
     }
     @Override
     protected void onStop() {
         super.onStop();
-        RateHelper.onStop(this);
+        RSHelper.onStop(this);
         finish();
     }
 
@@ -318,15 +316,5 @@ public class MainActivity extends AppCompatActivity implements AdsHelper.AdLoadF
             }
         }
         return false;
-    }
-
-    @Override
-    public void onAdLoadFail() {
-
-    }
-
-    @Override
-    public void onLoadAds(View adView) {
-
     }
 }

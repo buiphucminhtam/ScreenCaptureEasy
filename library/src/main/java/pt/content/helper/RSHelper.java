@@ -3,7 +3,7 @@ package pt.content.helper;
 import android.content.Context;
 import android.preference.PreferenceActivity;
 import android.support.v7.app.AppCompatActivity;
-
+//out of date
 
 public class RSHelper {
     public static boolean loaded = false;

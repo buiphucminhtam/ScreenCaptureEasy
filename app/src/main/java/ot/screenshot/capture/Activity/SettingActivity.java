@@ -30,10 +30,9 @@ import com.google.android.gms.ads.MobileAds;
 
 import ot.screenshot.capture.R;
 import ot.screenshot.capture.Util.SharedPreferencesManager;
-import pt.content.helper.AdsHelper;
-import pt.content.helper.RateHelper;
+import pt.content.helper.RSHelper;
 
-public class SettingActivity extends PreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener, AdsHelper.AdLoadFailListener {
+public class SettingActivity extends PreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private SharedPreferences prefs;
     private String defaultLocation;
@@ -89,7 +88,7 @@ public class SettingActivity extends PreferenceActivity implements SharedPrefere
         v.setLayoutParams(params);
         v.setForegroundGravity(Gravity.CENTER_HORIZONTAL);
         v.addHeaderView(mAdView);
-        if (!RateHelper.isPremium(this)) {
+        if (!RSHelper.isPremium(this)) {
             MobileAds.initialize(this, getString(ot.screenshot.capture.R.string.appID));
             AdRequest adRequest = new AdRequest.Builder().build();
             mAdView.loadAd(adRequest);
@@ -179,7 +178,7 @@ public class SettingActivity extends PreferenceActivity implements SharedPrefere
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if (RateHelper.showOnBackpress(this))
+        if (RSHelper.showOnBackpress(this))
             super.onBackPressed();
         startActivity(new Intent(this,MainActivity.class));
         finish();
@@ -188,7 +187,7 @@ public class SettingActivity extends PreferenceActivity implements SharedPrefere
     @Override
     protected void onResume() {
         super.onResume();
-        RateHelper.showOnAction(this);
+        RSHelper.showOnAction(this);
         getPreferenceScreen().getSharedPreferences()
                 .registerOnSharedPreferenceChangeListener(this);
     }
@@ -196,23 +195,13 @@ public class SettingActivity extends PreferenceActivity implements SharedPrefere
     @Override
     protected void onStart() {
         super.onStart();
-        RateHelper.onStart(this);
+        RSHelper.onStart(this);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        RateHelper.onStop(this);
+        RSHelper.onStop(this);
         finish();
-    }
-
-    @Override
-    public void onAdLoadFail() {
-
-    }
-
-    @Override
-    public void onLoadAds(View adView) {
-
     }
 }
